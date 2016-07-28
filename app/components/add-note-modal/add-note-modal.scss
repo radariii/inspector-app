@@ -1,0 +1,9 @@
+.addNoteModal {
+    textarea {
+        width: 100%;
+        height: 50%;
+        border: 1px solid color($colors, medium);
+        border-radius: 2px;
+        padding: 10px;        
+    }
+}

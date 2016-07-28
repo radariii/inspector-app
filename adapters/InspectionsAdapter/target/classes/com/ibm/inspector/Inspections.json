@@ -1,0 +1,226 @@
+[  
+   {  
+      "id":"1",
+      "name":"Store Location #45",
+      "type":"FOOD",
+      "location":"5440 Yonge St, Toronto, ON",
+      "reason":"Regular inspection date reached. Inspection frequency: once per year",
+      "contactName":"Jimmy Jamison",
+      "contactPhone":"416-323-2121",
+      "status":"NOT_STARTED",
+      "startTime":"2014-07-01 15:16:17",
+      "duration":null,
+      "inspector":"1",
+      "incidents":[  
+      ]
+   },
+   {  
+      "id":"2",
+      "name":"Store Location #17",
+      "type":"FOOD",
+      "location":"907 Jane St, North York, ON",
+      "reason":"Complaint received",
+      "contactName":"Bill Blainey",
+      "contactPhone":"416-323-2121",
+      "status":"NOT_STARTED",
+      "inspector":"2",
+      "incidents":[  
+         {  
+            "id":"2.1",
+            "name":"Rodents found in kitchen",
+            "description":"Rodent entrails discovered in the kitchen storage area",
+            "severity":"HIGH",
+            "photos":[  
+
+            ],
+            "checklistItemId":"3"
+         }
+      ]
+   },
+   {  
+      "id":"3",
+      "name":"Store Location #11",
+      "type":"FOOD",
+      "location":"538 Church St, Toronto, ON",
+      "contactName":"Craig Scott",
+      "contactPhone":"416-323-2121",
+      "status":"NOT_STARTED",
+      "inspector":"3"
+   },
+   {  
+      "id":"4",
+      "name":"Store Location #22",
+      "type":"FOOD",
+      "location":"936 Eglinton Ave W, Toronto, ON",
+      "contactName":"Gordon Gables",
+      "contactPhone":"416-323-2121",
+      "status":"NOT_STARTED",
+      "inspector":"4"
+   },
+   {  
+      "id":"5",
+      "name":"Store Location #6",
+      "type":"FOOD",
+      "location":"685 Kennedy, Scarborough, ON, M1K 2B8",
+      "contactName":"Henry Hutchinson",
+      "contactPhone":"416-323-2121",
+      "status":"NOT_STARTED",
+      "inspector":"1"
+   },
+   {  
+      "id":"100",
+      "status":"COMPLETED",
+      "startTime":"2014-07-01 15:16:17",
+      "duration":469926,
+      "inspector":"1",
+      "incidents":[  
+         {  
+            "id":"100.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"101",
+      "status":"COMPLETED",
+      "startTime":"2014-07-02 10:16:17",
+      "duration":515130,
+      "inspector":"1",
+      "incidents":[  
+         {  
+            "id":"101.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"102",
+      "status":"COMPLETED",
+      "startTime":"2014-07-04 21:16:17",
+      "duration":423566,
+      "inspector":"1",
+      "incidents":[  
+         {  
+            "id":"102.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"200",
+      "status":"COMPLETED",
+      "startTime":"2014-07-03 11:16:17",
+      "duration":573105,
+      "inspector":"2",
+      "incidents":[  
+         {  
+            "id":"200.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"201",
+      "status":"COMPLETED",
+      "startTime":"2014-07-04 08:16:17",
+      "duration":541008,
+      "inspector":"2",
+      "incidents":[  
+         {  
+            "id":"201.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"202",
+      "status":"COMPLETED",
+      "startTime":"2014-07-07 12:16:17",
+      "duration":564222,
+      "inspector":"2",
+      "incidents":[  
+         {  
+            "id":"202.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"300",
+      "status":"COMPLETED",
+      "startTime":"2014-07-01 20:16:17",
+      "duration":355722,
+      "inspector":"3",
+      "incidents":[  
+         {  
+            "id":"300.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"301",
+      "status":"COMPLETED",
+      "startTime":"2014-07-03 15:16:17",
+      "duration":558092,
+      "inspector":"3",
+      "incidents":[  
+         {  
+            "id":"301.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"302",
+      "status":"COMPLETED",
+      "startTime":"2014-07-06 12:16:17",
+      "duration":392667,
+      "inspector":"3",
+      "incidents":[  
+         {  
+            "id":"302.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"400",
+      "status":"COMPLETED",
+      "startTime":"2014-07-01 13:16:17",
+      "duration":407573,
+      "inspector":"4",
+      "incidents":[  
+         {  
+            "id":"400.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"401",
+      "status":"COMPLETED",
+      "startTime":"2014-07-05 17:16:17",
+      "duration":452464,
+      "inspector":"4",
+      "incidents":[  
+         {  
+            "id":"401.1",
+            "severity":"LOW"
+         }
+      ]
+   },
+   {  
+      "id":"402",
+      "status":"COMPLETED",
+      "startTime":"2014-07-06 10:16:17",
+      "duration":384909,
+      "inspector":"4",
+      "incidents":[  
+         {  
+            "id":"402.1",
+            "severity":"LOW"
+         }
+      ]
+   }
+]

@@ -1,0 +1,94 @@
+.hidden {
+    display: none;
+}
+
+.spinnerContainer {
+    text-align: center;
+    padding: 20px;
+}
+
+ion-item-divider {
+    background-color: color($colors, medium);
+    padding: 6px 16px;
+    color: color($colors, white);
+    text-align: center;
+    font-weight: bold;
+}
+
+.mainContentContainerBox {
+	border-radius: 5px;
+	border: 1px solid #d0d0d0;
+	background: white;
+	padding: 0px;
+	margin-bottom: 15px;
+	overflow: hidden;
+	
+	-webkit-transition: height 0.5s ease;
+}
+.mainContentContainerBox .header {
+	color: white;
+    background-color: color($colors, primary);
+	border-radius: 4px 4px 0px 0px;
+	border-width: 0px 0px 1px 0px;
+	font-size: 1.1em;
+}
+.mainContentContainerBox .containerContent {
+	font-size: 1.1em;
+}
+.mainContentContainerBox .header > .title{
+	padding: 5px 10px;	
+}
+.mainContentContainerBox .header.collapsable {
+	cursor: pointer;
+}
+.mainContentContainerBox .header.collapsable[state='collapsed'] {
+	border-radius: 4px;
+}
+.mainContentContainerBox .listItem {
+	padding: 10px;
+	position: relative;
+}
+
+.listItem:NOT(.last) {
+	border-bottom: 1px solid #d2d2d2;	
+}
+
+.listItem > .title {
+	color: #000000;
+	font-weight: bold;
+	font-size: 0.85em;
+	text-transform: uppercase;
+	padding-bottom: 3px;
+}
+
+.listItem > .value {
+	color: #424242;
+	font-weight: normal;
+	font-size: 1.1em;
+}
+.listItem > .icon.right {
+	position: absolute;
+	right: 0px;
+	padding: 5px 10px;
+	top: 0px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	margin: 7px 1px;
+	font-size: 1.5em;
+}
+
+.smallBox {
+	border: 1px solid #dddddd;
+	border-radius: 5px;
+	background-color: #f9f9f9;
+	
+}
+
+.mainContentContainerTitle{
+	font-weight: bold;
+	color: #424242;
+	margin: 0px 0px 4px;
+}
+.mainContentContainerSpacer {
+	height: 20px;
+}

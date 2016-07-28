@@ -1,0 +1,11 @@
+<ion-content class="stepUpAuthenticationModal" #content scroll="false">
+  <div #headerBar class="horizontalHeaderBar">
+    <div class="label">Sign to Complete the Inspection</div>
+  </div>
+  <canvas #canvas width="100px" height="100px">
+  </canvas>
+  <div #buttonBar class="signatureButtonContainer">
+    <button class="button button-assertive" on-tap="signatureCancelled()">Cancel</button>&nbsp;&nbsp;
+    <button class="button button-balanced" on-tap="signatureAdded()">Finish inspection</button>
+  </div>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-content class="loginPage" (click)="blurActiveInput()">
+  <div class="pageContent">
+    <div class="logo">
+    </div>
+    <div class="loginBox">
+      <div class="inputContainer">
+        <input type="text" autocorrect="off" autocapitalize="off" placeholder="username" [(ngModel)]="username">
+      </div>
+      <div class="inputContainer">
+        <input type="password" autocorrect="off" autocapitalize="off" placeholder="password" [(ngModel)]="password">
+      </div>  
+      <div class="buttonContainer">
+        <button secondary block (click)="login()">
+          <span [ngClass]="{hidden: loginInProgress}">Sign in</span>
+          <div class="loginSpinnerContainer" [ngClass]="{hidden: !loginInProgress}"><ion-spinner light></ion-spinner></div>
+        </button>
+      </div>
+    </div>
+    <div class="errorBox" [ngClass]="{hidden: !loginError}">{{loginError}}</div>
+    <!--<div class="bottomLogoContainer">
+      <img class="bottomLogo" src="images/icon.png">
+      <div class="bottomText">Powered by <br/>IBM MobileFirst Foundation</div>
+    </div>-->
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="feedback">
+		<div class="imageContainer"><img src="images/shake_phone-white.png"></div>
+		<div class="description">Have feedback about our app? Just shake your phone to tell us how we're doing!</div>
+	</div>
+</ion-footer>
+

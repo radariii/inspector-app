@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Licensed Materials - Property of IBM
+	5725-I43 (C) Copyright IBM Corp. 2011, 2016. All Rights Reserved.
+	US Government Users Restricted Rights - Use, duplication or
+	disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<mfp:adapter name="Checklists"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mfp="http://www.ibm.com/mfp/integration"
+	xmlns:http="http://www.ibm.com/mfp/integration/http">
+
+	<displayName>Checklists</displayName>
+	<description>Checklists</description>
+
+	<JAXRSApplicationClass>com.ibm.inspector.checklists.ChecklistsApplication</JAXRSApplicationClass>
+
+	<property name="applicationClientId" displayName="Application Client ID" defaultValue="8183c43f-be22-45ae-9b09-42678fdc8d8d"/>
+
+</mfp:adapter>

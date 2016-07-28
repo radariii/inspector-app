@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-navbar secondary>
+    <ion-buttons start>
+      <button class="button button-light button-clear" (tap)="cancel()">Cancel</button>
+    </ion-buttons>
+    <ion-title>Add Appointment Note</ion-title>
+    <ion-buttons end>
+      <button class="button button-light button-clear" (tap)="save()" [disabled]="isSaveDisabled()">Save</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="addNoteModal">
+  <textarea [(ngModel)]="appointmentNote.content" placeholder="Enter the note to add to the appointment record" (ngModelChange)="onChange($event)"></textarea>
+</ion-content>

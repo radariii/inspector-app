@@ -1,0 +1,73 @@
+.inspection-detail {
+
+    .incident .value {
+        padding: 0 2em;
+    }
+
+    .header.incidents > .title {
+        font-weight: normal;
+    }
+
+    ion-content {
+        background-color: white;
+    }
+    .pageContentContainer {
+    }
+
+    .itemCountContainer {
+        text-align: center;
+        padding: 0.5em 0;
+        line-height: 3.2em;
+        font-size: 1.1em;
+    }
+    .itemCountContainer table {
+        width: 100%;
+    }
+    .itemCount {
+        font-size: 3em;
+        vertical-align: middle;
+        font-weight: bold;
+        color: #3b88c3;
+        text-align: right;
+        width: 30%;
+    }
+    .itemCountContainer .label {
+        vertical-align: middle;
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    .itemCount.completed {
+        color: #25ae5f;
+    }
+    .itemCount.incidents {
+        color: #FF8500;
+    }
+
+    .listItem.noIncidents .value {
+        text-align: center;
+        margin: 0 20px;
+        font-style: italic;
+        color: #727272;
+        font-weight: lighter;
+        font-size: 0.85em;
+    }
+
+    .listItem.incident {
+        padding: 16px 10px;
+    }
+
+    .severityIndicator {
+        font-size: 1.5em;
+        position: absolute;
+    }
+    .severityIndicator[severity='HIGH'] {
+        color: #ff2525;	
+    }
+    .severityIndicator[severity='MEDIUM'] {
+        color: #FF8500;
+    }
+    .severityIndicator[severity='LOW'] {
+        color: #ede822;
+    }
+}

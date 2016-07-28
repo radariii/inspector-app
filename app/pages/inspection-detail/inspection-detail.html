@@ -1,0 +1,53 @@
+<ion-header class="inspection-detail-header">
+  <ion-navbar primary>
+    <ion-title>Inspection Details</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding class="inspection-detail">
+		<div class="pageContentContainer">
+   			<div class="mainContentContainerBox">
+   				<div class="listItem">
+   					<div class="title">Location</div>
+   					<div class="value">{{inspection.name}}</div>
+   					<div class="value">{{inspection.location}}</div>
+   					<div class="icon right"><i class="fa fa-map-marker"></i></div>
+   				</div>
+   				<div class="listItem">
+   					<div class="title">Contact</div>
+   					<div class="value">{{inspection.contactName}}</div>
+   					<div class="icon right"><i class="fa fa-user"></i></div>
+   				</div>
+   				<div class="listItem last">
+   					<div class="title">INSPECTION NOTES</div>
+   					<div class="value">{{!!inspection.reason ? inspection.reason : "No additional notes"}}</div>
+   				</div>
+			</div>
+  				
+			<div class="mainContentContainerBox">
+   				<div class="header incidents">
+   					<div class="title">Inspection Status</div>
+   				</div>
+   				<div class="containerContent">
+   					<div class="listItem noIncidents" *ngIf="!inspection.checklistItems">
+              <div class="spinnerContainer">
+                <ion-spinner ></ion-spinner>
+              </div>
+    					<div class="value">Retrieving inspection status</div>
+    				</div>
+   					<div class="itemCountContainer" *ngIf="inspection.checklistItems">
+   						<table>
+   							<tr><td class="itemCount completed">{{getCompletedItemCount()}}</td><td class="label">items completed</td></tr>
+   							<tr><td class="itemCount">{{getUncompletedItemCount()}}</td><td class="label">items remaining</td></tr>
+   							<tr><td class="itemCount incidents">{{getIncidentCount()}}</td><td class="label">incidents discovered</td></tr>
+   						</table>
+   					</div>
+   				</div>	    				
+			</div>
+  				    				
+		</div>	
+</ion-content>
+<ion-footer>
+  <div class="homeFooter bar" dark>
+    <button class="button button-block button-balanced" (click)="showChecklist()"><i class="fa fa-bars"></i>&nbsp;&nbsp;Show inspection checklist</button>
+  </div>
+</ion-footer>

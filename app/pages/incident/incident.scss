@@ -1,0 +1,90 @@
+.incident-header {
+
+}
+
+.incident-page {
+
+    input[type=text]{
+        width: 100%;
+    }
+
+    textarea {
+        width: 100%;
+    }
+
+    .row {
+        padding: 0;
+        margin: -5px 0;
+    }
+
+    .col {
+        padding: 0;
+    }
+
+    .bar-footer .col {
+        padding: 5px;
+    }
+
+    .recordAudioButton {
+        float: right;
+        min-width: 30px;
+    }
+    .spinnerContainer {
+        padding-top: 5px;
+    }
+
+    .photoThumbnail {
+        display: inline-block;
+        line-height: 2.5em;
+        height: 2.5em;
+        font-size: 2.5em;
+        color: #929292;
+        background-color: #d9d9d9;
+        padding: 0;
+        border-radius: 4px;
+        width: 60px;
+        margin: 5px;
+        text-align: center;
+        vertical-align: middle;
+        background-size: cover;
+        background-position: center center;
+    }
+
+    .severitySelection {
+        ion-grid {
+            padding: 0;
+        }
+        ion-col {
+            padding: 0;
+        }
+        
+        .incidentSeverityOption {
+            margin: 5px;
+            line-height: 3.0em;
+            border-radius: 3px;
+            text-align: center;	
+            color: white;
+            font-size: 0.7em;
+            opacity: 0.3;	
+            cursor: pointer;
+        }
+
+        .incidentSeverityOption.yellow {
+            color: #828282;	
+            background-color: color($colors, yellow);
+        }
+        .incidentSeverityOption.orange {
+            background-color: color($colors, orange);
+        }
+        .incidentSeverityOption.red {
+            background-color: color($colors, red);
+        }
+
+        .incidentSeverityOption.selected {
+            font-weight: bold;
+            opacity: 1;
+        }
+    }
+    
+}
+

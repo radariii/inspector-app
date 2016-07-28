@@ -1,0 +1,65 @@
+<ion-header primary class="homeHeader">
+  <ion-navbar hideBackButton primary>
+    <ion-title><div class="logo" (click)="addInspection()"></div></ion-title>
+    <ion-buttons end><button class="button-light button-clear" (click)="logout()">Logout</button></ion-buttons>
+  </ion-navbar>
+  <ion-toolbar class="subHeader" secondary>
+    <div class="subHeaderText lightBlue">outstanding inspections</div>	    			
+  </ion-toolbar>
+</ion-header>
+<ion-content class="page-home">	
+  <ion-refresher (ionRefresh)="doRefresh($event)" pullMax="500">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div [ngClass]="{hidden: !loading}" class="spinnerContainer">
+    <ion-spinner ></ion-spinner>
+  </div>
+  <!--<ion-list [ngClass]="{hidden: loading}">-->
+	<div>
+  		<div class="pageContentContainer">
+   			<div class="inspectionListContainer">
+   				<div class="inspectionListItemVerticalLine"></div>	    				
+   				<div class="inspectionListItemOuterContainer" *ngFor="let inspection of inspections">
+            <div class="inspectionListItemContainer" [ngClass]="{hidden: isInspectionComplete(inspection), selected: inspection == selectedInspection}">
+              <div class="inspectionListItemContentsContainer" (click)="selectInspection(inspection)">
+                <div class="inspectionListItem">
+                  <div class="locationItemIconContainer">
+                    <div class="locationItemIconRingContainer">
+                      <div class="locationItemIconRing"></div>
+                    </div>
+                    <div class="locationItemIcon"><i class="fa fa-tags"></i></div>
+                  </div>
+                  <div class="locationItemDetailsContainer">
+                    <div class="locationName">{{inspection.name}}</div>
+                    <div class="locationAddress">{{inspection.location}}</div>
+                    <div class="locationDistance">Distance: {{inspection.distanceToSite}}</div>
+                  </div>
+                </div>
+              </div>
+              <div class="inspectionListItemButtonBarContainer">
+                <button secondary (click)="openInspection(inspection)"><i class="fa fa-play"></i></button>
+                <button secondary><i class="fa fa-comment"></i></button>
+                <button secondary><i class="fa fa-map-marker"></i></button>
+                <button secondary><i class="fa fa-info-circle"></i></button>
+              </div>	
+            </div>		    			
+    			</div>	    				
+  				</div>
+  			</div>
+  			
+<!--  			
+		<div class="popupDialog" *ngIf="pushData.showNotification">
+		    <div class="popupContents">
+		    	<div class="notificationTitle">{{pushData.notificationTitle}}</div>
+		    	<div class="notificationBody" ng-bind-html="pushData.notificationBody"></div>
+		    	<div class="notificationCloseButton" on-tap="hideNotification()"><i class="fa fa-times"></i></div>
+		    </div>
+		</div>
+-->        			
+	</div>
+</ion-content>
+<ion-footer>
+  <div class="homeFooter bar" dark>
+    <button class="button button-block button-assertive" (click)="openReport()"><i class="fa fa-bar-chart-o"></i>&nbsp;&nbsp;My status</button>
+  </div>
+</ion-footer>

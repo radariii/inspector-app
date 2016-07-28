@@ -1,0 +1,71 @@
+<ion-header class="incident-header">
+
+  <ion-navbar primary>
+    <ion-title>Incident Details</ion-title>
+  </ion-navbar>
+  
+</ion-header>
+
+
+<ion-content padding class="incident-page">
+    <div class="pageContentContainer">
+      <div class="mainContentContainerBox">
+        <div class="listItem">
+          <div class="title">Incident title</div>
+          <div *ngIf="incidentMode=='VIEW'" class="value">{{incident.name}}</div>
+          <div *ngIf="incidentMode!='VIEW'" class="valueEdit">
+            <input type="text" [(ngModel)]="incident.name">
+          </div>
+        </div>
+        <div class="listItem">
+          <div class="title">Description <button class="button button-small button-positive button-icon button-outline recordAudioButton" (click)="captureDescriptionAudio()"><i class="fa fa-microphone" [ngClass]="{hidden: processingAudio}"></i><div class="spinnerContainer" [ngClass]="{hidden: !processingAudio}"><ion-spinner></ion-spinner></div></button></div>
+          <div *ngIf="incidentMode=='VIEW'" class="value">{{incident.description}}</div>
+          <textarea *ngIf="incidentMode!='VIEW'" class="valueEdit" [(ngModel)]="incident.description"></textarea>
+        </div>
+        <div class="listItem severitySelection">
+          <div class="title">Severity</div>
+          <ion-grid><ion-row>
+            <ion-col><div [ngClass]="{selected: incident.severity == 'LOW'}" (click)="setSeverity(incident, 'LOW')" class="incidentSeverityOption yellow">LOW</div></ion-col>
+            <ion-col><div [ngClass]="{selected: incident.severity == 'MEDIUM'}" (click)="setSeverity(incident, 'MEDIUM')" class="incidentSeverityOption orange">MEDIUM</div></ion-col>
+            <ion-col><div [ngClass]="{selected: incident.severity == 'HIGH'}" (click)="setSeverity(incident, 'HIGH')" class="incidentSeverityOption red">HIGH</div></ion-col>
+          </ion-row></ion-grid>
+        </div>
+        <div class="listItem last">
+          <div class="title">Photos</div>
+          <div class="incidentPhotoContainer">
+            <div *ngFor="let photo of incident.photos" class="photoThumbnail" style="{{getBackgroundImageImageDataUrl(photo)}}"></div>
+            <div *ngIf="incidentMode!='VIEW'" (click)="takePhoto()" class="photoThumbnail addPhoto valueEdit">
+              <i class="fa fa-plus"></i></div>
+          </div>
+        </div>
+      </div>	
+    </div>		
+</ion-content>
+<ion-footer>
+  <ion-toolbar dark>
+    <div class="value row" *ngIf="incidentMode=='VIEW'">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <button class="button button-block blue light edit" (click)="setMode('EDIT')"><i class="fa fa-pencil"></i>&nbsp;&nbsp;<span class="label">Edit</span></button>
+          </ion-col>
+          <ion-col>
+            <button class="button button-block button-balanced done" (click)="done()"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="label">Done</span></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <div class="valueEdit row" *ngIf="incidentMode!='VIEW'">
+      <ion-grid>
+        <ion-row>
+          <ion-col>      
+      	    <button class="button button-block button-light cancel" (click)="done()"><i class="fa fa-ban"></i>&nbsp;&nbsp;<span class="label">Cancel</span></button>
+          </ion-col>
+          <ion-col>
+            <button class="button button-block button-balanced save" (click)="saveIncident()"><i class="fa fa-check"></i>&nbsp;&nbsp;<span class="label">Save</span></button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-toolbar>
+</ion-footer>			

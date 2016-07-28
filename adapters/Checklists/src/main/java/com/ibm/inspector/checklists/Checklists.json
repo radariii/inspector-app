@@ -1,0 +1,52 @@
+[  
+   {  
+      "description":"At least 4 sales reps on the floor helping customers",
+      "details":"Each sales rep must be covering the 4 key entrance areas in the north, south, east and west.",
+      "id":"1",
+      "inspectionType":"FOOD",
+      "mandatory":1,
+      "parentRequirementId_FK":null,
+      "points":5,
+      "requiresReinspection":1
+   },
+   {  
+      "description":"Two sales rep nearby the check out counter (in view of customers approaching)",
+      "details":"The sales reps should not be more than 10-20 feet away and visible to the customer approaching the counter.",
+      "id":"2",
+      "inspectionType":"FOOD",
+      "mandatory":1,
+      "parentRequirementId_FK":null,
+      "points":10,
+      "requiresReinspection":1
+   },
+   {  
+      "description":"Weekly sales items by the entrances",
+      "details":"Each of the North, south, east and west entrances should have the weekly sale items on the window panes (on both sides).",
+      "id":"3",
+      "inspectionType":"FOOD",
+      "mandatory":1,
+      "parentRequirementId_FK":null,
+      "points":0,
+      "requiresReinspection":1
+   },
+   {  
+      "description":"Customer bathrooms clean and maintained",
+      "details":"All stalls filled with toilet paper and coverings. All soap dispensers working. Each sales rep is required to sign their name on the maintenance chart 3 times daily to verify checks at scheduled times.",
+      "id":"4",
+      "inspectionType":"FOOD",
+      "mandatory":1,
+      "parentRequirementId_FK":"3",
+      "points":5,
+      "requiresReinspection":0
+   },
+   {  
+      "description":"Security personnel actively roaming on the floor",
+      "details":"One security personnel should be on the floor at all times and moving from each of the 3 entrance zones.",
+      "id":"5",
+      "inspectionType":"FOOD",
+      "mandatory":0,
+      "parentRequirementId_FK":"3",
+      "points":1,
+      "requiresReinspection":0
+   }
+]

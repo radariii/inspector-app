@@ -1,0 +1,169 @@
+.checklist-header {
+    .progressButtonContainer {
+        background-color: #e2e2e2;
+        font-size: 0.8em;
+        position: relative;
+    }
+
+    ion-grid {
+        padding: 0;
+    }
+
+    .progressButtonContainer .button-block {
+        margin: 0;
+    }
+
+    .elapsedTimeContainer {
+        font-size: 1.2em;
+        line-height: 1.2em;
+    }
+
+    .elapsedTimeTitle {
+        text-transform: uppercase;
+        font-size: 0.65em;
+        color: #626262;
+        text-align: center;
+        margin-top: 4px;
+    }
+
+    .elapsedTimeValue {
+        font-size: 1.5em;
+        text-align: center;
+        font-weight: bold;
+        color: #494949;
+    }
+}
+
+.checklist-page {
+
+    .pageContentContainer {
+        padding: 10px;
+    }
+
+    ion-grid {
+        padding: 0;
+    }
+    .pageContentContainer {
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+    .listItem.checklistItem {
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .checklistItem.selected {
+        background-color: #f2f2f2;
+    }
+
+    .checklistItemContent {
+        padding: 8px;
+    }
+
+    .checklistStatus {
+        width: 15%;
+        display: inline-block;
+        box-sizing: border-box;
+        cursor: pointer;
+        vertical-align: middle;
+        text-align: center;
+        position: relative;
+        left: -2px;
+    }
+
+
+    .checklistStatus .fa {
+        font-size: 2em;	
+    }
+
+    .checklistItemDescription {
+        display: inline-block;
+        width: 80%;
+        vertical-align: middle;
+    }
+
+    .checklistItemDetails {
+        margin-top: 8px;
+        border-radius: 3px;
+        padding: 10px;
+        background-color: #e2e2e2;
+        font-size: 0.9em;
+        line-height: 1.3em;
+    }
+
+    .checklistStatus .fa-check-circle {
+        color: #25AE5F;
+    }
+
+    .checklistStatus .fa-times-circle {
+        color: #25AE5F;
+    }
+
+    .checklistItemButtonBar {
+        padding: 0 7px;
+        background-color: #d2d2d2;
+        border-bottom: 1px solid #999999;
+    }
+
+    .checklistItemButtonBar .button .text {
+        vertical-align: middle;
+        padding-left: 0.4em;
+    }
+
+    .checklistItemIncidentContainer {
+        margin-top: 0.5em;	
+    }
+
+    .checklistItemIncidentContainer .listItem.incident {
+        padding: 0 0 0 15px;
+        background-color: #E9E9E9;
+        border-radius: 0.3em;
+        margin: 0.3em 0;
+        border: 1px solid #FFF;
+
+        .item-inner {
+            border: none;
+        }
+
+        ion-label {
+            margin-left: 20px;
+            position: relative;
+            overflow: visible;     
+            white-space: initial;       
+        }
+
+        .severityIndicator {
+            position: absolute;
+            left: -20px;
+            margin: auto;
+            top: 1px;
+            bottom: 0;
+        }
+
+        .severityIndicator.LOW {	
+            color: color($colors, yellow);
+        }
+        .severityIndicator.MEDIUM {
+            color: color($colors, orange);
+        }
+        .severityIndicator.HIGH {
+            color: color($colors, red);
+        }        
+    }
+
+    .checklistItemIncidentContainer .incident .value {
+        font-size: 0.9em;
+        margin-top: 0.1em;
+        min-height: 1.3em;
+    }
+
+    .checklistItemIncidentContainer .listItem > .icon.right {
+        margin-top: 6px;
+        font-size: 1em;
+        color: #929292;
+    }
+}
+
+
+
+
