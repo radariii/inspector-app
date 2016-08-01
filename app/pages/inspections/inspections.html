@@ -20,7 +20,7 @@
    			<div class="inspectionListContainer">
    				<div class="inspectionListItemVerticalLine"></div>	    				
    				<div class="inspectionListItemOuterContainer" *ngFor="let inspection of inspections">
-            <div class="inspectionListItemContainer" [ngClass]="{hidden: isInspectionComplete(inspection), selected: inspection == selectedInspection}">
+            <div class="inspectionListItemContainer" *ngIf="inspection.inspector == '1'" [ngClass]="{hidden: isInspectionComplete(inspection), selected: inspection == selectedInspection}">
               <a class="inspectionListItemContentsContainer" (click)="selectInspection(inspection)">
                 <div class="inspectionListItem">
                   <div class="locationItemIconContainer">
