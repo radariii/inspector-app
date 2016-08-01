@@ -10,12 +10,12 @@ import {StorageService} from './providers/storage-service/storage-service';
 import {AdapterService} from './providers/adapter-service/adapter-service';
 import {DataService} from './providers/data-service/data-service';
 import {NotificationService} from './providers/notification-service/notification-service';
-import {GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
+//import {GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
 import {NewInspectionModal} from './components/new-inspection-modal/new-inspection-modal';
 
 @Component({
   template: '<ion-nav [root]="rootPage" swipeBackEnabled="false"></ion-nav>',
-  providers: [StorageService, AdapterService, DataService, NotificationService, GOOGLE_MAPS_PROVIDERS]
+  providers: [StorageService, AdapterService, DataService, NotificationService] //, GOOGLE_MAPS_PROVIDERS]
 })
 export class InspectorApp {
 

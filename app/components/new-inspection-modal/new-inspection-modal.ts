@@ -1,12 +1,12 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import {Page, NavController, Modal, ViewController, NavParams} from 'ionic-angular';
 import * as moment from 'moment';
-import {GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
+//import {GOOGLE_MAPS_DIRECTIVES} from 'angular2-google-maps/core';
 
 @Component({
   selector: 'new-inspection-modal',
   templateUrl: 'build/components/new-inspection-modal/new-inspection-modal.html',
-  directives: [GOOGLE_MAPS_DIRECTIVES]
+  directives: []// GOOGLE_MAPS_DIRECTIVES]
 })
 export class NewInspectionModal {
     
