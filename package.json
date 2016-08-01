@@ -6,7 +6,7 @@
     "@angular/http": "2.0.0-rc.3",
     "@angular/platform-browser": "2.0.0-rc.3",
     "@angular/platform-browser-dynamic": "2.0.0-rc.3",
-    "angular2-google-maps": "^0.12.0",
+    "angular2-google-maps": "git+http://radariii@github.com/radariii/angular2-google-maps.git",
     "cordova": "^6.3.0",
     "es6-shim": "^0.35.0",
     "ionic": "^2.0.0-beta.35",
