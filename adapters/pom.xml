@@ -11,6 +11,9 @@
 	    <module>Inspections</module>
 	    <module>Checklists</module>
 	    <module>Inspectors</module>
+        <module>PushAdapter</module>
+        <module>AuthenticationAdapter</module>
+    <module>APIAdapter</module>
   </modules>
 
     <properties>

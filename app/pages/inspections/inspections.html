@@ -21,7 +21,7 @@
    				<div class="inspectionListItemVerticalLine"></div>	    				
    				<div class="inspectionListItemOuterContainer" *ngFor="let inspection of inspections">
             <div class="inspectionListItemContainer" [ngClass]="{hidden: isInspectionComplete(inspection), selected: inspection == selectedInspection}">
-              <div class="inspectionListItemContentsContainer" (click)="selectInspection(inspection)">
+              <a class="inspectionListItemContentsContainer" (click)="selectInspection(inspection)">
                 <div class="inspectionListItem">
                   <div class="locationItemIconContainer">
                     <div class="locationItemIconRingContainer">
@@ -35,7 +35,7 @@
                     <div class="locationDistance">Distance: {{inspection.distanceToSite}}</div>
                   </div>
                 </div>
-              </div>
+              </a>
               <div class="inspectionListItemButtonBarContainer">
                 <button secondary (click)="openInspection(inspection)"><i class="fa fa-play"></i></button>
                 <button secondary><i class="fa fa-comment"></i></button>

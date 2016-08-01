@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { Connection, Network } from 'ionic-native';
 import 'rxjs/add/operator/map';
 import { AdapterService } from '../adapter-service/adapter-service';
@@ -38,13 +38,49 @@ export class DataService {
           }
         )      
       } else {
-        this._adapterService.callAdapter("Inspections", "inspections", "GET", null).then( 
+        //this._adapterService.callAdapter("Inspections", "inspections", "GET", null).then(
+        this._adapterService.callApi("/api/inspections", "GET", null, null).then( 
           (response) => {
             this.inspections = response;
             this._saveOffline(this.inspections, false).then(() => resolve(this.inspections), (error) => reject(error)); 
           },
           (error) => {
             reject(error);
+// // TESTING
+//               this.inspections = [
+//                 {
+//                   "id": "1",
+//                   "name": "The Owl & Firkin Pub",
+//                   "type": "FOOD",
+//                   "location": "5440 Yonge St, Toronto, ON",
+//                   "reason": "Regular inspection date reached. Inspection frequency: once per year",
+//                   "contactName": "Jimmy Jamison",
+//                   "contactPhone": "416-323-2121",
+//                   "status": "NOT_STARTED",
+//                   "startTime": "2014-07-01 15:16:17",
+//                   "duration": null,
+//                   "inspector": "1",
+//                   "lat": 51.65,
+//                   "lng": 7.82,
+//                   "incidents": []
+//                 },
+//                 {
+//                   "id": "2",
+//                   "name": "The Snooty Fox",
+//                   "type": "FOOD",
+//                   "location": "5440 Yonge St, Toronto, ON",
+//                   "reason": "Regular inspection date reached. Inspection frequency: once per year",
+//                   "contactName": "Jimmy Jamison",
+//                   "contactPhone": "416-323-2121",
+//                   "status": "NOT_STARTED",
+//                   "startTime": "2014-07-01 15:16:17",
+//                   "duration": null,
+//                   "inspector": "1",
+//                   "lat": 51.62,
+//                   "lng": 7.84,
+//                   "incidents": []
+//                 }                  
+//               ]
           }
         );     
       }     
@@ -59,7 +95,8 @@ export class DataService {
         this._saveOffline(inspections, true).then(() => resolve(), (error) => reject(error));
       } else {
         // Try to save to the server first
-        this._adapterService.callAdapter("Inspections", "inspections", "POST", inspections).then(
+        //this._adapterService.callAdapter("Inspections", "inspections", "POST", inspections).then(
+        this._adapterService.callApi("/api/inspections", "POST", null, inspections).then(  
           (response) => {
             this._saveOffline(inspections, false).then(() => resolve(), (error) => reject(error));
           }, 
@@ -79,7 +116,8 @@ export class DataService {
         this._saveOffline(inspection, true).then(() => resolve(), (error) => reject(error));
       } else {
         // Try to save to the server first
-        this._adapterService.callAdapter("Inspections", "inspection/" + inspection.id, "PUT", inspection).then(
+        //this._adapterService.callAdapter("Inspections", "inspection/" + inspection.id, "PUT", inspection).then(
+        this._adapterService.callApi("/api/inspections/" + inspection.id, "PUT", [], inspection).then(
           (response) => {
             this._saveOffline(inspection, false).then(() => resolve(), (error) => reject(error));
           }, 

@@ -6,6 +6,7 @@ import {IncidentPage} from '../incident/incident';
 import {AdapterService} from '../../providers/adapter-service/adapter-service';
 import {StorageService} from '../../providers/storage-service/storage-service';
 import {DataService} from '../../providers/data-service/data-service';
+import {NotificationService} from '../../providers/notification-service/notification-service';
 import {StepUpAuthenticationModal} from '../../components/step-up-authentication-modal/step-up-authentication-modal';
 import * as moment from 'moment';
 
@@ -23,9 +24,10 @@ export class ChecklistPage extends ParentPage {
 		durationForDisplay: "00:00:00",
 		timer: undefined
 	}
+	fromWatch: boolean = false;
 
   constructor(private nav: NavController, navParams: NavParams, 
-              private _adapterService: AdapterService, private _storageService: StorageService, private _dataService:DataService) {
+              private _adapterService: AdapterService, private _storageService: StorageService, private _dataService:DataService, private _notificationService:NotificationService) {
     super("Checklist");
     this.inspection = navParams.get("inspection");
 
@@ -37,6 +39,19 @@ export class ChecklistPage extends ParentPage {
       }
       ckItem.incidents.push(incident);
     }    
+		
+		this._notificationService.eventEmitter.subscribe({ 
+      next: (inspectionData) => {
+				if (inspectionData.inspectionAction == "STARTED"){
+					this.startInspection(true);
+				} else if (inspectionData.inspectionAction == "SUSPENDED"){
+					this.suspendInspection(true);
+				} else if (inspectionData.inspectionAction == "FINISHED"){
+					this.fromWatch = true;
+					this.completeInspection(true);
+				}			
+			}
+		});		
   }
 
 	
@@ -82,24 +97,15 @@ export class ChecklistPage extends ParentPage {
 		
 		this.saveInspection();
 		this.nav.push(IncidentPage, {inspection: this.inspection, checklistItem: checklistItem, incident: {}, mode: "NEW"});
+		WL.Analytics.log({"checklistItem": checklistItem.summary, "incidentId": new Date().getTime()});
+		
 	};
 	
 	selectIncident(incident){
 		this.nav.push(IncidentPage, {incident: incident, mode: "VIEW"});
 	};
 	
-	// $rootScope.$on("inspectionWatchAction", function(event, inspectionData){
-	// 	this.$apply(function(){
-	// 		if (inspectionData.inspectionAction == "STARTED"){
-	// 			this.startInspection(true);
-	// 		} else if (inspectionData.inspectionAction == "SUSPENDED"){
-	// 			this.suspendInspection(true);
-	// 		} else if (inspectionData.inspectionAction == "FINISHED"){
-	// 			this.fromWatch = true;
-	// 			this.completeInspection(true);
-	// 		}			
-	// 	});
-	// });
+	
 	
 	startInspection(fromWatch){
 		var inspection = this.inspection;
@@ -114,22 +120,22 @@ export class ChecklistPage extends ParentPage {
 			this.data.durationForDisplay = this.formatDurationForDisplay(this.inspection.duration);
 		}, 1000);
 		inspection.status = "IN_PROGRESS";
-		// if (!fromWatch){
-		// 	$rootScope.$broadcast("inspectionPhoneAction", {inspectionAction: "STARTED"});			
-		// }
+		if (!fromWatch){
+			this._notificationService.sendToWatch({inspectionAction: "STARTED"});
+		}
 		this.saveInspection();
 	}
 	
 	suspendInspection(fromWatch){
 		this.inspection.status = "SUSPENDED";
 		clearInterval(this.data.timer);
-		// if (!fromWatch){
-		// 	$rootScope.$broadcast("inspectionPhoneAction", {inspectionAction: "SUSPENDED"});
-		// }
+		if (!fromWatch){
+		 	this._notificationService.sendToWatch({inspectionAction: "SUSPENDED"});
+		}
 		this.saveInspection();
 	};
 	
-	completeInspection(){
+	completeInspection(fromWatch){
 		// Open the signature modal
 		let signatureModal = Modal.create(StepUpAuthenticationModal);
     this.nav.present(signatureModal);
@@ -140,21 +146,21 @@ export class ChecklistPage extends ParentPage {
           //this.completedStoreNumbers.push(SharedData.inspection.number);
           clearInterval(this.data.timer);
           this.saveInspection();
-          // if (!this.fromWatch){
-          // 	$rootScope.$broadcast("inspectionPhoneAction", {inspectionAction: "COMPLETED"});
-          // 	this.fromWatch = false;
-          // }
-          // AdapterService.callAdapter($scope, "IBM_BPM", "startProcess", [{bpdId: "25.b27dc3e8-9761-4dc5-88e9-f809274914cf", processAppId: "2066.4a50e3c6-f0aa-4303-824d-21f87e9bb5c2"}]);
+
+          if (!this.fromWatch){
+						this._notificationService.sendToWatch({inspectionAction: "COMPLETED"});
+           	this.fromWatch = false;
+          }
           this.nav.pop();
-        }
+					WL.Analytics.log({"inspectionComplete": new Date().getTime(), "inspectionDuration": this.inspection.duration / 1000, "completedByInspector": this.inspection.inspector});
+
+        } else {
+					// Dialog was cancelled
+					this.fromWatch = false;
+				}
       }
     );
 	}; 
-	
-	// signatureCancelled() {
-	// 	this.fromWatch = false;
-	// 	this.signatureModal.hide();
-	// }
 
 	setChecklistItemComplete(checklistItem){
 		if (checklistItem.status == "PASSED"){

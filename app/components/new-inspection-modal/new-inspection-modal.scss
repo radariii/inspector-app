@@ -1,0 +1,33 @@
+.newInspectionModal {
+    padding: 20px;
+    
+    .sebm-google-map-container {
+        height: 400px;
+        width: 100%;
+    }
+    
+    .inspectionDetails {
+        text-align: center;
+        padding: 15px;
+
+        .title {
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 3px 0;
+        }
+        .detail {
+            padding: 3px 0;
+        }
+    }
+    ion-content {
+        background-color: white;
+
+    }
+
+    .buttonContainer {
+        margin-top: 10px;
+        text-align: center;
+        padding: 8px 10px;
+        background-color: #e2e2e2;
+    }
+}

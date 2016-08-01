@@ -95,7 +95,7 @@ export class IncidentPage extends ParentPage {
 	takePhoto(){
     let options = { quality: 10, targetWidth: 150, targetHeight: 300, destinationType: Camera.DestinationType.DATA_URL};
 		Camera.getPicture(options).then(
-      (imageData) => {
+      		(imageData) => {
 				this.incident.photos.push(imageData);
 			}, 
 			(error) => {}

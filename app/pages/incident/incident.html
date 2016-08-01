@@ -10,13 +10,42 @@
 <ion-content padding class="incident-page">
     <div class="pageContentContainer">
       <div class="mainContentContainerBox">
-        <div class="listItem">
-          <div class="title">Incident title</div>
-          <div *ngIf="incidentMode=='VIEW'" class="value">{{incident.name}}</div>
+        <ion-item>
+          <ion-label stacked>Incident title</ion-label>
+          <ion-input type="text" [(ngModel)]="incident.name" [ngDisabled]="incidentMode == 'VIEW'"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Description</ion-label>
+          <ion-textarea [(ngModel)]="incident.description"></ion-textarea>
+        </ion-item>
+        <ion-item class="severitySelection">
+          <ion-label stacked>Severity</ion-label>
+          <div item-content class="itemContent">
+            <ion-grid><ion-row>
+              <ion-col><div [ngClass]="{selected: incident.severity == 'LOW'}" class="incidentSeverityOption yellow"><a (click)="setSeverity(incident, 'LOW')">LOW</a></div></ion-col>
+              <ion-col><div [ngClass]="{selected: incident.severity == 'MEDIUM'}" class="incidentSeverityOption orange"><a (click)="setSeverity(incident, 'MEDIUM')">MEDIUM</a></div></ion-col>
+              <ion-col><div [ngClass]="{selected: incident.severity == 'HIGH'}" class="incidentSeverityOption red"><a (click)="setSeverity(incident, 'HIGH')">HIGH</a></div></ion-col>
+            </ion-row></ion-grid>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Photos</ion-label>
+          <div item-content class="itemContent">
+              <div class="incidentPhotoContainer">
+              <!--<div *ngFor="let photo of incident.photos" class="photoThumbnail" style="{{getBackgroundImageDataUrl(photo)}}"></div>-->
+              <img *ngFor="let photo of incident.photos" class="photoThumbnail" src="data:image/jpeg;base64,{{photo}}">
+              <a *ngIf="incidentMode!='VIEW'" (click)="takePhoto()" class="photoThumbnail addPhoto valueEdit">
+                <i class="fa fa-plus"></i>
+              </a>
+            </div>
+          </div>
+        </ion-item>          
+          <!--<div *ngIf="incidentMode=='VIEW'" class="value">{{incident.name}}</div>
           <div *ngIf="incidentMode!='VIEW'" class="valueEdit">
             <input type="text" [(ngModel)]="incident.name">
-          </div>
-        </div>
+          </div>-->
+        <!--</div>-->
+<!--        
         <div class="listItem">
           <div class="title">Description <button class="button button-small button-positive button-icon button-outline recordAudioButton" (click)="captureDescriptionAudio()"><i class="fa fa-microphone" [ngClass]="{hidden: processingAudio}"></i><div class="spinnerContainer" [ngClass]="{hidden: !processingAudio}"><ion-spinner></ion-spinner></div></button></div>
           <div *ngIf="incidentMode=='VIEW'" class="value">{{incident.description}}</div>
@@ -38,6 +67,7 @@
               <i class="fa fa-plus"></i></div>
           </div>
         </div>
+-->
       </div>	
     </div>		
 </ion-content>

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { NavController, Platform } from 'ionic-angular';
+import { Component, NgZone } from '@angular/core';
+import { NavController, Platform, Modal } from 'ionic-angular';
 import { Connection, Network, Dialogs } from 'ionic-native';
 import {ParentPage} from '../parent/parent';
 import {LoginPage} from '../login/login';
 import {ReportPage} from '../report/report';
-import {InspectionDetailPage} from '../inspection-detail/inspection-detail'; 
+import {InspectionDetailPage} from '../inspection-detail/inspection-detail';
+import {NewInspectionModal} from '../../components/new-inspection-modal/new-inspection-modal'; 
 import {DataService} from '../../providers/data-service/data-service';
 import * as moment from "moment";
 
@@ -19,8 +20,23 @@ export class InspectionsPage extends ParentPage {
   inspections: any = [];
   selectedInspection:any = null;
   
-  constructor(private _nav: NavController, platform: Platform, private _DataService:DataService) {
+  constructor(private _nav: NavController, platform: Platform, private _ngZone:NgZone, private _DataService:DataService) {
     super("Inspections");
+
+    MFPPush.registerNotificationsCallback((content) => {
+        console.log("Push notification received: %o", content);
+        let newInspectionModal = Modal.create(NewInspectionModal, {inspection: JSON.parse(content.payload)});
+        this._ngZone.run(() => {
+          this._nav.present(newInspectionModal);
+        });        
+        newInspectionModal.onDismiss(
+            (data) => {
+                if (data){
+                  this.inspections.push(data);
+                }
+            }
+        );                    
+    });    
   }
 
 	selectInspection(inspection){
@@ -66,7 +82,35 @@ export class InspectionsPage extends ParentPage {
 	}
 	
 	openReport() {
-    this._nav.push(ReportPage, {});
+    //this._nav.push(ReportPage, {});
+    var newInspection = {
+            "id" : new Date().getTime(),
+            "name": "Store Location #12",
+            "number": "12",
+            "type": "FOOD",
+            "location": "3 King St. W, Toronto, ON, M5W 1E6",
+            "reason": "Regularly scheduled inspection is now due",
+            "contactName": "Barry Backhaus",
+            "contactPhone": "416-594-3232",
+            "status": "NOT_STARTED",
+            "startTime": moment().format("YYYY-MM-DD hh:mm:ss"),
+            "distanceToSite": "3.7 miles",
+            "duration": null,
+            "inspector": "1",
+            "lat": 51.65,
+            "lng": 7.8,
+            "incidentCount": 0,
+            "incidents": []
+          };
+    let newInspectionModal = Modal.create(NewInspectionModal, {inspection: newInspection});
+    this._nav.present(newInspectionModal);
+    newInspectionModal.onDismiss(
+        (data) => {
+            if (data){
+              this.inspections.push(data);
+            }
+        }
+    );          
 	}
 	
 		

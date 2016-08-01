@@ -1,8 +1,0 @@
-applications:
-- path: .
-  memory: 256M
-  instances: 1
-  domain: mybluemix.net
-  name: inspector-proxy
-  host: inspector-proxy
-  disk_quota: 1024M

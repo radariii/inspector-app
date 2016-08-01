@@ -51,14 +51,14 @@
 		<div class="mainContentContainerBox">
 			<div class="listItem checklistItem" (click)="selectChecklistItem(checklistItem)" [ngClass]="{selected: selectedItem == checklistItem}" *ngFor="let checklistItem of inspection.checklistItems">
 				<div class="checklistItemContent">
-					<div (click)="setChecklistItemComplete(checklistItem)" class="checklistStatus">
+					<a (click)="setChecklistItemComplete(checklistItem)" class="checklistStatus">
 						<i class="fa"
 							[ngClass]="{'fa-circle-thin': !checklistItem.status,
 											   'fa-times-circle': (checklistItem.status == 'FAILED'),
 											   'fa-check-circle': (checklistItem.status == 'PASSED'),
 											   last: ($index == inspection.checklistItems.length-1)}"></i>
 	
-					</div>
+					</a>
 					<div class="value checklistItemDescription">{{checklistItem.description}}</div>
 					<div class="checklistItemIncidentContainer" *ngIf="(checklistItem.incidents && checklistItem.incidents.length > 0)">
 						<button ion-item class="listItem incident" [ngClass]="{last: $index == (inspection.incidents.length-1)}" *ngFor="let incident of getIncidentsForChecklistItem(checklistItem)" (click)="selectIncident(incident)">

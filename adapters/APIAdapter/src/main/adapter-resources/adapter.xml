@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Licensed Materials - Property of IBM
+	5725-I43 (C) Copyright IBM Corp. 2011, 2016. All Rights Reserved.
+	US Government Users Restricted Rights - Use, duplication or
+	disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<mfp:adapter name="APIAdapter"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:mfp="http://www.ibm.com/mfp/integration"
+	xmlns:http="http://www.ibm.com/mfp/integration/http">
+
+	<displayName>APIAdapter</displayName>
+	<description>APIAdapter</description>
+
+	<JAXRSApplicationClass>com.ibm.inspector.APIAdapterApplication</JAXRSApplicationClass>
+	
+	<property displayName="API Gateway URL" name="apiGatewayUrl" defaultValue="https://api.us.apiconnect.ibmcloud.com/crmilescaibmcom-inspector/sb"/>
+	<property displayName="Application Key (Client ID)" name="appKey" defaultValue="8183c43f-be22-45ae-9b09-42678fdc8d8d"/>
+	<property displayName="Application Secret" name="appSecret" defaultValue=""/>
+	
+</mfp:adapter>

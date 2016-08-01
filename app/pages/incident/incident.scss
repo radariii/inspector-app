@@ -4,25 +4,25 @@
 
 .incident-page {
 
-    input[type=text]{
-        width: 100%;
+    .item {
+        padding-left: 0;
+
+        .item-inner {
+            padding-left: 16px;
+        }
+
+        .itemContent {
+            width: 100%;
+            text-align: left;
+            padding-bottom: 10px;
+        }
     }
+    // input[type=text]{
+    //     width: 100%;
+    // }
 
     textarea {
         width: 100%;
-    }
-
-    .row {
-        padding: 0;
-        margin: -5px 0;
-    }
-
-    .col {
-        padding: 0;
-    }
-
-    .bar-footer .col {
-        padding: 5px;
     }
 
     .recordAudioButton {
@@ -31,6 +31,9 @@
     }
     .spinnerContainer {
         padding-top: 5px;
+    }
+
+    .incidentPhotoContainer {
     }
 
     .photoThumbnail {
@@ -67,11 +70,18 @@
             font-size: 0.7em;
             opacity: 0.3;	
             cursor: pointer;
+             
+            a {
+                padding: 12px 15px;
+                color: white
+            }
         }
 
-        .incidentSeverityOption.yellow {
-            color: #828282;	
+        .incidentSeverityOption.yellow {	
             background-color: color($colors, yellow);
+            a {
+                color: #828282;
+            }
         }
         .incidentSeverityOption.orange {
             background-color: color($colors, orange);
@@ -81,8 +91,10 @@
         }
 
         .incidentSeverityOption.selected {
-            font-weight: bold;
             opacity: 1;
+            a {
+                font-weight: bold;
+            }
         }
     }
     

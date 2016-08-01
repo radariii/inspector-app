@@ -60,6 +60,7 @@ public class InspectionsResource {
 	@Produces("application/json")
 	@OAuthSecurity(scope="accessRestricted")
 	public Response getInspections(){
+		System.err.println("Hello world");
 		try {
 			logger.info("Retrieving inspection list");
 			InputStream is = this.getClass().getResourceAsStream("Inspections.json");

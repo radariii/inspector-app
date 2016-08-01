@@ -3,16 +3,19 @@
 ///<reference path="../plugins/cordova-plugin-mfp-push/typings/mfppush.d.ts"/>
 
 import {Component, Renderer} from '@angular/core';
-import {Platform, ionicBootstrap} from 'ionic-angular';
+import {Platform, ionicBootstrap, Modal, NavController} from 'ionic-angular';
 import {StatusBar, Network, Dialogs, Connection} from 'ionic-native';
 import {LoginPage} from './pages/login/login'; 
 import {StorageService} from './providers/storage-service/storage-service';
 import {AdapterService} from './providers/adapter-service/adapter-service';
 import {DataService} from './providers/data-service/data-service';
+import {NotificationService} from './providers/notification-service/notification-service';
+import {GOOGLE_MAPS_PROVIDERS} from 'angular2-google-maps/core';
+import {NewInspectionModal} from './components/new-inspection-modal/new-inspection-modal';
 
 @Component({
   template: '<ion-nav [root]="rootPage" swipeBackEnabled="false"></ion-nav>',
-  providers: [StorageService, AdapterService, DataService]
+  providers: [StorageService, AdapterService, DataService, NotificationService, GOOGLE_MAPS_PROVIDERS]
 })
 export class InspectorApp {
 
@@ -77,15 +80,30 @@ export class InspectorApp {
         }, 5000);
     }
     WL.Logger.updateConfigFromServer();
+	
+	// $rootScope.$on("inspectionPhoneAction", function(event, inspectionData){
+	// 	inspectionData.sequence = $scope.eventCount++;
+	// 	inspectionData.direction = "Web to phone to watch";
+	// 	WL.App.sendActionToNative("inspectionAction", inspectionData);
+	// });    
 
     // Connect to the server immediately to enable app management
     WLAuthorizationManager.obtainAccessToken().then(function(){
         MFPPush.initialize (
             function(successResponse) {
                 console.log("MFP Push successfully intialized: " + JSON.stringify(successResponse));
-                MFPPush.registerNotificationsCallback(function(content){
-                console.log("Push notification received: %o", content);
-                });
+                // MFPPush.registerNotificationsCallback(function(content){
+                //     console.log("Push notification received: %o", content);
+                //     let newInspectionModal = Modal.create(NewInspectionModal, {inspection: {hello: "world"}});
+                //     this.nav.present(newInspectionModal);
+                //     newInspectionModal.onDismiss(
+                //         (data) => {
+                //             if (data){
+                //                 this.nav.pop();
+                //             }
+                //         }
+                //     );                    
+                // });
                 WLAuthorizationManager.obtainAccessToken("push.mobileclient").then(function(){
                 MFPPush.registerDevice({"phoneNumber":""},
                     function(successResponse) {

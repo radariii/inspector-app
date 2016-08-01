@@ -14,7 +14,6 @@ import 'rxjs/add/operator/catch';
 export class AdapterService {
 
   callAdapter (adapterName:string, path:string, verb:string, content: any): Promise<any> {
-    
     verb = verb.toUpperCase();
     let rrVerb = verb === "GET" ? WLResourceRequest.GET : (verb === "POST" ? WLResourceRequest.POST : (verb === "PUT" ? WLResourceRequest.PUT : (verb === "DELETE" ? WLResourceRequest.DELETE : "")));
     var resourceRequest = new WLResourceRequest("/adapters/" + adapterName + "/" + path, rrVerb);
@@ -33,16 +32,31 @@ export class AdapterService {
             );
           }
     );
-    
   }  
 
-  private extractData(response: any){
-      return response.responseJSON;
-  }
-  
-  private handleError(err: any, source: Observable<any>, caught: Observable<any>) : Observable<any> {
-      console.error("ERROR calling adapter: %o", err);
-      return caught;
-  }
+  callApi (apiPath:string, verb:string, queryParams: Array<{key: String, value: String}>, content: any): Promise<any> {
+    let apiInvocationRequest = {
+      httpVerb: verb.toUpperCase(),
+      apiUrl: apiPath,
+      data: content,
+      queryParams: queryParams
+    }
+    var resourceRequest = new WLResourceRequest("/adapters/APIAdapter/callAPI", "POST");
+    resourceRequest.addHeader("Content-type", "application/json");
+    
+    return new Promise(
+          (resolve, reject) => {
+            resourceRequest.send(apiInvocationRequest).then(
+              (response) => {
+                resolve(response.responseJSON);
+              },
+              (error) => {
+                console.error("ERROR calling API: %o", error);
+                reject(error);
+              }
+            );
+          }
+    );    
+  }   
 }
 

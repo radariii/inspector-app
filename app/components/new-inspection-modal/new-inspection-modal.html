@@ -1,0 +1,24 @@
+<ion-header class="newInspectionModalHeader" primary> 
+  <ion-navbar primary>
+    <ion-title>Incoming Inspection</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="newInspectionModal" scroll="false">
+  <sebm-google-map [latitude]="inspection.lat" [longitude]="inspection.lng" >
+    <sebm-google-map-marker [latitude]="inspection.lat" [longitude]="inspection.lng"></sebm-google-map-marker>
+  </sebm-google-map>
+  <div class="inspectionDetails">
+    <div class="title">{{inspection.name}}</div>
+    <div class="detail">{{inspection.location}}</div>
+    <div class="detail">Reason: {{inspection.reason}}</div>
+    <div class="detail">{{inspection.contactName}} - <a href="tel:{{inspection.contactPhone}}">{{inspection.contactPhone}}</a></div>
+  </div>
+  <div class="buttonContainer">
+    <ion-grid>
+      <ion-row>
+        <ion-col><button balanced block (click)="accept()">Accept</button></ion-col>
+        <ion-col><button assertive block (click)="cancel()">Reject</button></ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
