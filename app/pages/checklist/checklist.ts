@@ -156,12 +156,6 @@ export class ChecklistPage extends ParentPage {
           this.nav.pop();
 					WL.Analytics.log({"inspectionComplete": new Date().getTime(), "inspectionDuration": this.inspection.duration / 1000, "completedByInspector": this.inspection.inspector});
 
-					this._adapterService.callApi("/process", "POST", 
-						[{key: "action", 				value: "start"},
-						{key: "bpdId", 				value: "25.41a2aec1-b738-40e3-954e-81e41f62496b"},
-						{key: "processAppId", 	value: "2066.82429baf-7245-461b-a7a8-5cef3f050ee9"}],
-						this.inspection);
-
         } else {
 					// Dialog was cancelled
 					this.fromWatch = false;
