@@ -65,7 +65,7 @@
     </mfp:android>
     <mfp:ios>
         <mfp:sdkChecksum>751670658</mfp:sdkChecksum>
-        <mfp:appChecksum>310805693</mfp:appChecksum>
+        <mfp:appChecksum>753706810</mfp:appChecksum>
         <mfp:security>
             <mfp:testWebResourcesChecksum enabled="false" ignoreFileExtensions="png, jpg, jpeg, gif, mp4, mp3" />
         </mfp:security>

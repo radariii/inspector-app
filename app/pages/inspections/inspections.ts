@@ -18,13 +18,21 @@ export class InspectionsPage extends ParentPage {
   loading: boolean = true;
   loadingError: string = "";
   inspections: any = [];
+  inspectorLat: number = 42.372753;
+  inspectorLng: number = -71.141094;
   selectedInspection:any = null;
+  logger: any;
   
   constructor(private _nav: NavController, platform: Platform, private _ngZone:NgZone, private _DataService:DataService) {
     super("Inspections");
 
+    this.logger = WL.Logger.create({pkg: 'com.ibm.inspector.InspectionsPage'});
+
     MFPPush.registerNotificationsCallback((content) => {
-        console.log("Push notification received: %o", content);
+        console.log("Push notification received: " + JSON.stringify(content));
+        
+        this.logger.debug("Push notification received: " + JSON.stringify(content));
+
         let newInspectionModal = Modal.create(NewInspectionModal, {inspection: JSON.parse(content.payload)});
         this._ngZone.run(() => {
           this._nav.present(newInspectionModal);
@@ -33,6 +41,7 @@ export class InspectionsPage extends ParentPage {
             (data) => {
                 if (data){
                   this.inspections.push(data);
+                  this.sortInspections();
                 }
             }
         );                    
@@ -56,31 +65,6 @@ export class InspectionsPage extends ParentPage {
 		//return SharedData.completedStoreNumbers.indexOf(inspection.number) > -1;
 	}
 	
-	addInspection() {
-		var newInspection = {
-			  "id" : new Date().getTime(),
-			  "name": "Store Location #12",
-			  "number": "12",
-			  "type": "FOOD",
-			  "location": "3 King St. W, Toronto, ON, M5W 1E6",
-			  "reason": "",
-			  "contactName": "Barry Backhaus",
-			  "contactPhone": "416-594-3232",
-			  "status": "NOT_STARTED",
-			  "startTime": moment().format("YYYY-MM-DD hh:mm:ss"),
-			  "distanceToSite": "3.7 miles",
-			  "duration": null,
-			  "inspector": "1",
-			  "incidentCount": 0,
-			  "incidents": []
-			};
-		
-		Dialogs.alert('New Inspection Assigned', newInspection.name + "\n" + newInspection.location, "OK")
-    .then(() => {
-			this.inspections.push(newInspection);
-    });
-	}
-	
 	openReport() {
     //this._nav.push(ReportPage, {});
     var newInspection = {
@@ -88,17 +72,17 @@ export class InspectionsPage extends ParentPage {
             "name": "Store Location #12",
             "number": "12",
             "type": "FOOD",
-            "location": "3 King St. W, Toronto, ON, M5W 1E6",
-            "reason": "Regularly scheduled inspection is now due",
-            "contactName": "Barry Backhaus",
-            "contactPhone": "416-594-3232",
+            "location": "180 Somerville Ave, Somerville, MA 02143",
+            "reason": "Complaint received in customer service area",
+            "contactName": "Bob Parker",
+            "contactPhone": "617-776-4036",
             "status": "NOT_STARTED",
             "startTime": moment().format("YYYY-MM-DD hh:mm:ss"),
             "distanceToSite": "3.7 miles",
             "duration": null,
             "inspector": "1",
-            "lat": 51.65,
-            "lng": 7.8,
+            "lat": 42.376285,
+            "lng": -71.090584,
             "incidentCount": 0,
             "incidents": []
           };
@@ -108,6 +92,7 @@ export class InspectionsPage extends ParentPage {
         (data) => {
             if (data){
               this.inspections.push(data);
+              this.sortInspections();
             }
         }
     );          
@@ -150,6 +135,28 @@ export class InspectionsPage extends ParentPage {
       WLAuthorizationManager.logout("UserLoginSecurityCheck").then(() => this._nav.popToRoot());
     }
   }
+
+  calculateDistance(inspection){
+    return this.getDistanceFromLatLon(this.inspectorLat, this.inspectorLng, inspection.lat, inspection.lng).toFixed(1);
+  }
+
+  getDistanceFromLatLon(lat1,lon1,lat2,lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = this.deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = this.deg2rad(lon2-lon1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(this.deg2rad(lat1)) * Math.cos(this.deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2)
+      ; 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d * 1.6; // Distance in miles
+  }
+
+  deg2rad(deg) {
+    return deg * (Math.PI/180)
+  }  
   
   doRefresh(refresher) {
     this.inspections = [];
@@ -157,6 +164,20 @@ export class InspectionsPage extends ParentPage {
     this.onPageDidEnter(true);
   }
   
+  sortInspections(){
+    this.inspections.sort(
+      (a,b) => {
+        let aDist = this.calculateDistance(a);
+        let bDist = this.calculateDistance(b);
+        if (aDist < bDist){
+          return -1;
+        } else {
+          return 1;
+        }
+      }
+    );    
+  }
+
   onPageDidEnter(hideSpinner:boolean = false){
     super.onPageDidEnter();
 
@@ -169,6 +190,7 @@ export class InspectionsPage extends ParentPage {
     this._DataService.load(ParentPage.fromPage == "Login" ? true : false).then(
       (inspections) => {
         this.inspections = inspections;
+        this.sortInspections();
         this.loading = false;
         this.loadingError = "";
         if (this._refresher){
