@@ -1,34 +1,107 @@
-[
-	{
-		"id": "1",
-		"name": "The Owl & Firkin Pub",
-		"type": "FOOD",
-		"location": "5440 Yonge St, Toronto, ON",
-		"reason": "Regular inspection date reached. Inspection frequency: once per year",
-		"contactName": "Jimmy Jamison",
-		"contactPhone": "416-323-2121",
-		"status": "NOT_STARTED",
-		"startTime": "2014-07-01 15:16:17",
-		"duration": null,
-		"inspector": "1",
-		"lat": 51.65,
-		"lng": 7.82,
-		"incidents": []
-	},
-	{
-		"id": "2",
-		"name": "The Snooty Fox",
-		"type": "FOOD",
-		"location": "5440 Yonge St, Toronto, ON",
-		"reason": "Regular inspection date reached. Inspection frequency: once per year",
-		"contactName": "Jimmy Jamison",
-		"contactPhone": "416-323-2121",
-		"status": "NOT_STARTED",
-		"startTime": "2014-07-01 15:16:17",
-		"duration": null,
-		"inspector": "1",
-		"lat": 51.62,
-		"lng": 7.84,
-		"incidents": []
-	}                  
-]
+[  
+      {  
+            "_id":"1",
+            "_rev":"1-9eb454e99da8140db4263e01d3f7d64a",
+            "contactName":"Jimmy Jamison",
+            "contactPhone":"416-323-2121",
+            "duration":null,
+            "id":"1",
+            "incidents":[  
+
+            ],
+            "inspector":"4",
+            "location":"550 Arsenal St, Watertown, MA",
+            "name":"Store #412",
+            "reason":"Regular inspection date reached. Inspection frequency: once per year",
+            "startTime":"2014-07-01 15:16:17",
+            "status":"NOT_STARTED",
+            "type":"FOOD",
+            "lat":42.2986126,
+            "lng":-71.1880056,
+            "loopback__model__name":"inspections"
+      },
+      {  
+            "_id":"2",
+            "_rev":"1-0159eb95b45dbe892788bad1eff4ef95",
+            "contactName":"Jimmy Jamison",
+            "contactPhone":"416-323-2121",
+            "duration":null,
+            "id":"2",
+            "incidents":[  
+
+            ],
+            "inspector":"1",
+            "location":"860 Commonwealth Ave, Brookline, MA 02446",
+            "name":"Store #87",
+            "reason":"Regular inspection date reached. Inspection frequency: once per year",
+            "startTime":"2014-07-01 15:16:17",
+            "status":"NOT_STARTED",
+            "type":"FOOD",
+            "lat":42.3297304,
+            "lng":-71.151413,
+            "loopback__model__name":"inspections"
+      },
+      {  
+            "_id":"3",
+            "_rev":"1-83491b118902df7e51d8564741cf2144",
+            "contactName":"Jimmy Jamison",
+            "contactPhone":"416-323-2121",
+            "duration":null,
+            "id":"3",
+            "incidents":[  
+
+            ],
+            "inspector":"1",
+            "location":"550 Arsenal St, Watertown, MA 02472",
+            "name":"Store #29",
+            "reason":"Regular inspection date reached. Inspection frequency: once per year",
+            "startTime":"2014-07-01 15:16:17",
+            "status":"NOT_STARTED",
+            "type":"FOOD",
+            "lat":42.376425,
+            "lng":-71.09038,
+            "loopback__model__name":"inspections"
+      },
+      {  
+            "_id":"4",
+            "_rev":"1-10a126de06c9e904f8039cfd11c6ed28",
+            "contactName":"Jimmy Jamison",
+            "contactPhone":"416-323-2121",
+            "duration":null,
+            "id":"4",
+            "incidents":[  
+
+            ],
+            "inspector":"3",
+            "location":"1341 Boylston St, Boston, MA 02215",
+            "name":"Store #132",
+            "reason":"Regular inspection date reached. Inspection frequency: once per year",
+            "startTime":"2014-07-01 15:16:17",
+            "status":"NOT_STARTED",
+            "type":"FOOD",
+            "lat":42.344523,
+            "lng":-71.099748,
+            "loopback__model__name":"inspections"
+      },
+      {  
+            "_id":"5",
+            "_rev":"1-ce7f5ec1418afea3734fdfa6ec39382c",
+            "contactName":"Jimmy Jamison",
+            "contactPhone":"416-323-2121",
+            "duration":null,
+            "id":"5",
+            "incidents":[  
+
+            ],
+            "inspector":"2",
+            "location":"South Bay Center, 7 Allstate Rd, Dorchester, MA 02125",
+            "name":"Store #91",
+            "reason":"Regular inspection date reached. Inspection frequency: once per year",
+            "startTime":"2014-07-01 15:16:17",
+            "status":"NOT_STARTED",
+            "type":"FOOD",
+            "lat":42.329664,
+            "lng":-71.062794,
+            "loopback__model__name":"inspections"
+         }
+   ]

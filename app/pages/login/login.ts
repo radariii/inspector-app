@@ -6,6 +6,9 @@ import {StorageService} from '../../providers/storage-service/storage-service';
 import {ParentPage} from '../parent/parent';
 import {StepUpAuthenticationModal} from '../../components/step-up-authentication-modal/step-up-authentication-modal';
 
+declare var window: any;
+declare var Paho: any;
+
 /*
   Generated class for the LoginPage page.
 
@@ -13,7 +16,7 @@ import {StepUpAuthenticationModal} from '../../components/step-up-authentication
   Ionic pages and navigation.
 */
 @Component({
-  templateUrl: 'build/pages/login/login.html',
+  templateUrl: 'build/pages/login/login.html'
 })
 export class LoginPage extends ParentPage {
 
@@ -49,7 +52,7 @@ export class LoginPage extends ParentPage {
         (error) => {
           this.logger.log("LoginPage(): Offline storage initialization failed.");
         }
-      );  
+      );     
 
     }, 1000);
 
@@ -114,7 +117,6 @@ export class LoginPage extends ParentPage {
     
   }
   
-
   login() {
     this.loginInProgress = true;    
     this.loginError = "";

@@ -58,7 +58,7 @@ public class InspectorsResource {
 //	@ApiResponses(value = { @ApiResponse(code = 200, message = "Hello message returned") })
 	@GET
 	@Produces("application/json")
-	@OAuthSecurity(scope="accessRestricted")
+//	@OAuthSecurity(scope="accessRestricted")
 	public Response getInspectors(){
 		try {
 			logger.info("Retrieving inspector list");

@@ -101,7 +101,7 @@ export class StorageService {
           (resolve, reject) => {
               this.loadFromOfflineStorage().then(
                   (inspections) => {
-                      //this._adapterService.callAdapter("inspections", "inspections", "PUT", JSON.stringify(inspections))
+                      //this._adapterService.callAdapter("inspections", "inspections", "PUT", JSON.stringify(inspections)).then(
                       this._adapterService.callApi("/api/inspections", "PUT", null, inspections).then(
                       (response) => {
                           WL.JSONStore.get("inspections").getAllDirty({}).then(

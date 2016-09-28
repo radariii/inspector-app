@@ -52,5 +52,13 @@
 				<extensions>true</extensions>
 			</plugin>
 		</plugins>
+		<resources>
+	      <resource>
+	        <directory>src/main/java</directory>
+	        <includes>
+	          <include>**/*.json</include>
+	        </includes>
+	      </resource>
+	    </resources>			
 	</build>
 </project>

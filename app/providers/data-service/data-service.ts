@@ -26,7 +26,7 @@ export class DataService {
 
     // We don't have the data yet, or a forced refresh is requested    
     return new Promise((resolve, reject) => {
-      if (Network.connection == Connection.NONE || Network.connection == Connection.UNKNOWN){
+      if (Network.connection == Connection.NONE){ // || Network.connection == Connection.UNKNOWN){
         // No network connection, so loading from local storage is the best we can do!
         this._storageService.loadFromOfflineStorage().then(
           (offlineinspections) => {
@@ -46,41 +46,42 @@ export class DataService {
           },
           (error) => {
             reject(error);
-// // TESTING
-//               this.inspections = [
-//                 {
-//                   "id": "1",
-//                   "name": "The Owl & Firkin Pub",
-//                   "type": "FOOD",
-//                   "location": "5440 Yonge St, Toronto, ON",
-//                   "reason": "Regular inspection date reached. Inspection frequency: once per year",
-//                   "contactName": "Jimmy Jamison",
-//                   "contactPhone": "416-323-2121",
-//                   "status": "NOT_STARTED",
-//                   "startTime": "2014-07-01 15:16:17",
-//                   "duration": null,
-//                   "inspector": "1",
-//                   "lat": 51.65,
-//                   "lng": 7.82,
-//                   "incidents": []
-//                 },
-//                 {
-//                   "id": "2",
-//                   "name": "The Snooty Fox",
-//                   "type": "FOOD",
-//                   "location": "5440 Yonge St, Toronto, ON",
-//                   "reason": "Regular inspection date reached. Inspection frequency: once per year",
-//                   "contactName": "Jimmy Jamison",
-//                   "contactPhone": "416-323-2121",
-//                   "status": "NOT_STARTED",
-//                   "startTime": "2014-07-01 15:16:17",
-//                   "duration": null,
-//                   "inspector": "1",
-//                   "lat": 51.62,
-//                   "lng": 7.84,
-//                   "incidents": []
-//                 }                  
-//               ]
+// TESTING
+              this.inspections = [
+                {
+                  "id": "1",
+                  "name": "The Owl & Firkin Pub",
+                  "type": "FOOD",
+                  "location": "5440 Yonge St, Toronto, ON",
+                  "reason": "Regular inspection date reached. Inspection frequency: once per year",
+                  "contactName": "Jimmy Jamison",
+                  "contactPhone": "416-323-2121",
+                  "status": "NOT_STARTED",
+                  "startTime": "2014-07-01 15:16:17",
+                  "duration": null,
+                  "inspector": "1",
+                  "lat": 51.65,
+                  "lng": 7.82,
+                  "incidents": []
+                },
+                {
+                  "id": "2",
+                  "name": "The Snooty Fox",
+                  "type": "FOOD",
+                  "location": "5440 Yonge St, Toronto, ON",
+                  "reason": "Regular inspection date reached. Inspection frequency: once per year",
+                  "contactName": "Jimmy Jamison",
+                  "contactPhone": "416-323-2121",
+                  "status": "NOT_STARTED",
+                  "startTime": "2014-07-01 15:16:17",
+                  "duration": null,
+                  "inspector": "1",
+                  "lat": 51.62,
+                  "lng": 7.84,
+                  "incidents": []
+                }                  
+              ]
+// TESTING END
           }
         );     
       }     

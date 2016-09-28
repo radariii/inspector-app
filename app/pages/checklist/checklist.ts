@@ -8,6 +8,7 @@ import {StorageService} from '../../providers/storage-service/storage-service';
 import {DataService} from '../../providers/data-service/data-service';
 import {NotificationService} from '../../providers/notification-service/notification-service';
 import {StepUpAuthenticationModal} from '../../components/step-up-authentication-modal/step-up-authentication-modal';
+import {SensorModal} from '../../components/sensor-modal/sensor-modal';
 import * as moment from 'moment';
 
 declare var SignaturePad:any;
@@ -54,8 +55,18 @@ export class ChecklistPage extends ParentPage {
 				}			
 			}
 		});		
+
   }
 
+	showSensors(){
+    let sensorModal = Modal.create(SensorModal, {inspection: this.inspection});
+    this.nav.present(sensorModal);
+    sensorModal.onDismiss(
+        (data) => {
+        }
+    );          
+		
+	}
 	
 	getIncidentsForChecklistItem(checklistItem){
 		var result = [];
@@ -155,6 +166,8 @@ export class ChecklistPage extends ParentPage {
           }
           this.nav.pop();
 					WL.Analytics.log({"inspectionComplete": new Date().getTime(), "inspectionDuration": this.inspection.duration / 1000, "completedByInspector": this.inspection.inspector});
+
+
 
         } else {
 					// Dialog was cancelled

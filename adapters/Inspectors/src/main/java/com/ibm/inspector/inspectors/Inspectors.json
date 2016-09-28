@@ -1,46 +1,62 @@
-[
-    {
-    	"id": "1",
-    	"name": "Ian Ingram",
-    	"username": "ian",
-    	"password": "password",
-    	"inspectionsCompleted": 4,
-    	"inspectionsRemaining": 2,
-    	"location": "123 Front Street, Toronto, ON",
-    	"icon": "http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png",
-		"lat": 51.15,
-		"lng": 7.52		
-    },
-    {
-    	"id": "2",
-    	"name": "Rachel Wilson",
-    	"username": "rachel",
-    	"password": "password",
-    	"inspectionsCompleted": 3,
-    	"inspectionsRemaining": 6,
-    	"location": "2803 Eglinton Ave E, Toronto, ON",
-    	"icon": "http://maps.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png",
-		"lat": 51.75,
-		"lng": 7.12		
-    },
-    {
-    	"id": "3",
-    	"name": "Jimmy Jamison",
-    	"username": "jimmy",
-    	"password": "password",
-    	"inspectionsCompleted": 1,
-    	"inspectionsRemaining": 4,
-    	"location": "2133 Jane St, Toronto, ON",
-    	"icon": "http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png"
-    },
-    {
-    	"id": "4",
-    	"name": "Wendy Williams",
-    	"username": "wendy",
-    	"password": "password",
-    	"inspectionsCompleted": 4,
-    	"inspectionsRemaining": 2,
-    	"location": "861 Danforth Ave, Toronto, ON",
-    	"icon": "http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png"
-    }    
-]
+[  
+      {  
+            "_id":"7a2ef10474fc093e18b87ce802654fcf",
+            "_rev":"3-1b40daa05c0acfd05e46d6947011375b",
+            "id":"2",
+            "name":"Rachel Wilson",
+            "username":"rachel",
+            "password":"password",
+            "inspectionsCompleted":3,
+            "inspectionsRemaining":6,
+            "location":"2803 Eglinton Ave E, Toronto, ON",
+            "lat":42.393156,
+            "lng":-71.100656,
+            "icon":"http://maps.google.com/intl/en_us/mapfiles/ms/micons/green-dot.png",
+            "loopback__model__name":"inspectors"
+      },
+      {  
+            "_id":"7a2ef10474fc093e18b87ce80271d992",
+            "_rev":"4-562aa8e3a4fbcc91b6ab9d38f4489ccf",
+            "id":"4",
+            "name":"Wendy Williams",
+            "username":"wendy",
+            "password":"password",
+            "inspectionsCompleted":4,
+            "inspectionsRemaining":2,
+            "location":"861 Danforth Ave, Toronto, ON",
+            "lat":42.326093,
+            "lng":-71.085502,
+            "icon":"http://maps.google.com/intl/en_us/mapfiles/ms/micons/orange-dot.png",
+            "loopback__model__name":"inspectors"
+      },
+      {  
+            "_id":"a264590b58d24e2a2ed41a6aa940b559",
+            "_rev":"3-94a6ddb464002d9c39cc1a1d6f1a23dd",
+            "id":"1",
+            "name":"Ian Ingram",
+            "username":"ian",
+            "password":"password",
+            "inspectionsCompleted":4,
+            "inspectionsRemaining":2,
+            "location":"123 Front Street, Toronto, ON",
+            "lat":42.372753,
+            "lng":-71.141094,
+            "icon":"http://maps.google.com/intl/en_us/mapfiles/ms/micons/red-dot.png",
+            "loopback__model__name":"inspectors"
+      },
+      {  
+            "_id":"a264590b58d24e2a2ed41a6aa95288aa",
+            "_rev":"3-7707bce1ce531d10302a4ad645386356",
+            "id":"3",
+            "name":"Jimmy Jamison",
+            "username":"jimmy",
+            "password":"password",
+            "inspectionsCompleted":1,
+            "inspectionsRemaining":4,
+            "location":"2133 Jane St, Toronto, ON",
+            "lat":42.357053,
+            "lng":-71.059409,
+            "icon":"http://maps.google.com/intl/en_us/mapfiles/ms/micons/blue-dot.png",
+            "loopback__model__name":"inspectors"
+      }
+   ]

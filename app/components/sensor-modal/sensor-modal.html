@@ -1,0 +1,14 @@
+<ion-header class="sensorModalHeader" assertive> 
+  <ion-navbar assertive>
+    <ion-title>Sensor Readings</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="sensorModal" scroll="false">
+  <div class="heading">Store Temperature Sensor Readings</div>
+  <chart style="width: 375px; height: 500px" [options]="options" (load)="saveInstance($event.context)"></chart>
+</ion-content>
+<ion-footer>
+  <div class="homeFooter bar" dark>
+    <button class="button button-block button-balanced" (click)="dismiss()">Dismiss</button>
+  </div>
+</ion-footer>
