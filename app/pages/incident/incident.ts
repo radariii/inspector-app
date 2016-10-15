@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, Platform, NavParams } from 'ionic-angular';
+import { NavController, Platform, NavParams, Loading, Modal } from 'ionic-angular';
 import { Connection, Network, Camera, Device } from 'ionic-native';
+import {RecordingModal} from '../../components/recording-modal/recording-modal';
 import {ParentPage} from '../parent/parent';
 import {AdapterService} from '../../providers/adapter-service/adapter-service';
 import {StorageService} from '../../providers/storage-service/storage-service';
@@ -8,6 +9,7 @@ import {DataService} from '../../providers/data-service/data-service';
 import * as moment from "moment";
 
 declare var navigator:any;
+declare var LiveUpdateManager:any;
 
 @Component({
   templateUrl: 'build/pages/incident/incident.html',
@@ -19,6 +21,10 @@ export class IncidentPage extends ParentPage {
 	incident = null;
 	incidentMode = "EDIT";
 	processingAudio: any = null;
+	liveUpdateFeatures: any = {
+		textFeatureEnabled: false,
+		speechFeatureEnabled: false
+	}
 
   constructor(private nav: NavController, navParams: NavParams, 
               private _adapterService: AdapterService, private _storageService: StorageService, private _dataService:DataService) {
@@ -46,28 +52,6 @@ export class IncidentPage extends ParentPage {
 			navigator.device.capture.captureAudio(this.updateDescriptionWithAudio, this.updateDescriptionWithAudio,{duration:10});			
 		}
 	}
-
-//	var req = new WLResourceRequest("https://stream.watsonplatform.net/speech-to-text/api/v1/sessions", WLResourceRequest.POST);
-//	req.addHeader("Authorization", "Basic ODQxNzg0ZmItZTkyOS00OTAwLWE4ZGItNDAxZTNkOTQxMjE0Onk5Q0dKVDNXSUdRcw==");
-//	req.send().then(
-//		function(successResponse){
-//			this.recognizeURL = successResponse.responseJSON.recognize;
-//			
-//			
-////			var req2 = new WLResourceRequest(this.recognizeURL, WLResourceRequest.POST);
-////			req2.addHeader("Content-Type", "audio/wav");
-////			req2.addHeader("Transfer-encoding", "chunked");
-////			req2.addHeader("Authorization", "Basic ODQxNzg0ZmItZTkyOS00OTAwLWE4ZGItNDAxZTNkOTQxMjE0Onk5Q0dKVDNXSUdRcw==");
-////			req2.send().then(
-////				function(successResponse){
-////				}, 
-////				function(error){
-////					console.error(error);
-////				}
-////			);
-//			
-//		}
-//	);
 	
 	setSeverity(incident, severity){
 		if (this.incidentMode != 'VIEW'){
@@ -93,7 +77,7 @@ export class IncidentPage extends ParentPage {
 	};
 	
 	takePhoto(){
-    let options = { quality: 10, targetWidth: 150, targetHeight: 300, destinationType: Camera.DestinationType.DATA_URL};
+    	let options = { quality: 10, targetWidth: 150, targetHeight: 300, destinationType: Camera.DestinationType.DATA_URL};
 		Camera.getPicture(options).then(
       		(imageData) => {
 				this.incident.photos.push(imageData);
@@ -102,23 +86,49 @@ export class IncidentPage extends ParentPage {
 		); 		
 	}
 
-  onPageDidEnter(){
-    super.onPageDidEnter();
-
-	if (this.incidentMode == "NEW"){
-		this.incident  = {id: new Date().getTime(), name: "", description: "", severity: "", photos: [], checklistItemId: this.checklistItem.id};
-		if (!this.inspection.incidents){
-			this.inspection.incidents = [];
-		}
-		this.inspection.incidents.push(this.incident);
-		
-		if (!this.checklistItem.incidents){
-		 	this.checklistItem.incidents = [];
-		}
-		this.checklistItem.incidents.push(this.incident.id);
-		
+	captureContent(textMode: boolean){
+		let recordingModal = Modal.create(RecordingModal, {incident: this.incident, textMode: textMode});
+		this.nav.present(recordingModal);
+		recordingModal.onDismiss(
+			(data) => {
+				if (data){
+					this.incident.name = data.name;
+					this.incident.description = data.description;
+					this.incident.severity = data.severity;
+				}
+			}
+		);          
 	}
-  }  
+
+	onPageDidEnter(){
+		super.onPageDidEnter();
+
+		var input = { params : {} ,useClientCache : false };                                                                                                    
+		LiveUpdateManager.obtainConfiguration(input, (configuration) => {
+			console.log("LiveUpdateConfiguration received: %o", configuration);     
+			this.liveUpdateFeatures.textFeatureEnabled = configuration.features["watson-incident-text"] == 1;
+			this.liveUpdateFeatures.speechFeatureEnabled = configuration.features["watson-incident-speech"] == 1;
+		} ,
+		function(err) {
+			if (err) {
+				console.error('Error retrieving LiveUpdate configuration:' + JSON.stringify(err));
+			}
+		});    		
+
+		if (this.incidentMode == "NEW"){
+			this.incident  = {id: new Date().getTime(), name: "", description: "", severity: "", photos: [], checklistItemId: this.checklistItem.id};
+			if (!this.inspection.incidents){
+				this.inspection.incidents = [];
+			}
+			this.inspection.incidents.push(this.incident);
+			
+			if (!this.checklistItem.incidents){
+				this.checklistItem.incidents = [];
+			}
+			this.checklistItem.incidents.push(this.incident.id);
+			
+		}
+	}  
 	
 	
 }

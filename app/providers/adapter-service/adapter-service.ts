@@ -57,6 +57,25 @@ export class AdapterService {
             );
           }
     );    
-  }   
+  }  
+
+  callBinaryApi (content: any): Promise<any> {
+    var resourceRequest = new WLResourceRequest("/adapters/APIAdapter/callBinaryAPI", "POST");
+    resourceRequest.addHeader("Content-type", "audio/wav");
+    
+    return new Promise(
+          (resolve, reject) => {
+            resourceRequest.send(content).then(
+              (response) => {
+                resolve(response.responseJSON);
+              },
+              (error) => {
+                console.error("ERROR calling binary API: %o", error);
+                reject(error);
+              }
+            );
+          }
+    );    
+  }     
 }
 

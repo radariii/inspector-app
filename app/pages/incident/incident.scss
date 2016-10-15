@@ -1,9 +1,12 @@
 .incident-header {
-
 }
 
 .incident-page {
-
+    
+    .mainContentContainerBox {
+        margin-bottom: 0;
+    }
+    
     .item {
         padding-left: 0;
 
@@ -23,6 +26,7 @@
 
     textarea {
         width: 100%;
+        min-height: 40px;
     }
 
     .recordAudioButton {
@@ -95,6 +99,15 @@
             a {
                 font-weight: bold;
             }
+        }
+    }
+
+    .buttonContainer {
+        ion-grid {
+            padding: 0;
+        }
+        .watsonIcon {
+            width: 20px;
         }
     }
     

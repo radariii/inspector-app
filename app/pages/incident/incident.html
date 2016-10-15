@@ -2,6 +2,9 @@
 
   <ion-navbar primary>
     <ion-title>Incident Details</ion-title>
+    <!--<ion-buttons end>
+      <button class="button-positive button-clear" (click)="captureContent(false)"><img class="watsonIcon" src="images/Watson-icon.png"></button>
+    </ion-buttons>    -->
   </ion-navbar>
   
 </ion-header>
@@ -12,11 +15,11 @@
       <div class="mainContentContainerBox">
         <ion-item>
           <ion-label stacked>Incident title</ion-label>
-          <ion-input type="text" [(ngModel)]="incident.name" [ngDisabled]="incidentMode == 'VIEW'"></ion-input>
+          <ion-input type="text" [(ngModel)]="incident.name" [disabled]="incidentMode == 'VIEW'"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Description</ion-label>
-          <ion-textarea [(ngModel)]="incident.description"></ion-textarea>
+          <ion-textarea [(ngModel)]="incident.description" [disabled]="incidentMode == 'VIEW'"></ion-textarea>
         </ion-item>
         <ion-item class="severitySelection">
           <ion-label stacked>Severity</ion-label>
@@ -69,6 +72,17 @@
         </div>
 -->
       </div>	
+      <div class="buttonContainer" *ngIf="incidentMode!='VIEW'">
+        <ion-grid><ion-row>
+          <ion-col *ngIf="liveUpdateFeatures.speechFeatureEnabled">
+            <button positive block (click)="captureContent(false)"><img class="watsonIcon" src="images/Watson-icon.png">&nbsp; Analyze Voice</button>
+          </ion-col>
+          <ion-col *ngIf="liveUpdateFeatures.textFeatureEnabled">
+            <button positive block (click)="captureContent(true)"><img class="watsonIcon" src="images/Watson-icon.png">&nbsp; Analyze Text</button>
+          </ion-col>
+        </ion-row></ion-grid>
+      </div>
+
     </div>		
 </ion-content>
 <ion-footer>

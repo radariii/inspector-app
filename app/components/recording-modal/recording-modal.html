@@ -1,0 +1,81 @@
+<ion-content class="recordingModal" scroll="false">
+  <div class="modalContent" [ngClass]="{hidden: textOnly}">
+    <div class="description">Record your message for the title and description of the incident.  The severity will automatically be set based on the intensity of the message.</div>
+    <div class="recordingContent" [ngClass]="{hidden: isProcessing}">
+      <a class="recordButton" (click)="record()" >
+        <div class="recordingCircleOuter">
+          <div class="recordingCircleInner" [ngClass]="{pulsing: isPulsing}"></div>
+        </div>
+      </a>
+      <div class="label" [ngClass]="{hidden: isRecording}">Tap to begin recording</div>
+      <div class="label" [ngClass]="{hidden: !isRecording}">Recording incident details...</div>
+    </div>
+    <div class="processingContent" [ngClass]="{hidden: !isProcessing}">
+      <div class="processingIcon"><img src="images/watson-loading-indicator.gif"></div>
+      <div class="label">Watson is analyzing...</div>
+    </div>
+  </div>
+  <div class="modalContentTextOnly" [ngClass]="{hidden: !textOnly}">
+    <div class="description">Enter the text for your description of the incident.  The severity will automatically be set based on the intensity of the message.</div>
+    <div class="TextContent" [ngClass]="{hidden: isProcessing}">
+      <ion-textarea [disabled]="isProcessing" [(ngModel)]="submissionText"></ion-textarea>
+      <button positive block (click)="submitText()">Submit</button>
+    </div>
+    <div class="processingContent" [ngClass]="{hidden: !isProcessing}">
+      <div class="processingIcon"><img src="images/watson-loading-indicator.gif"></div>
+      <div class="label">Watson is analyzing...</div>
+    </div>
+  </div>  
+  <div class="sentimentContainer">
+    <ion-grid>
+      <ion-row class="sentimentRow">
+        <div class="thresholdContainer">
+          <div class="thresholdBar high"></div>
+          <div class="thresholdBar medium"></div>
+        </div>
+        <ion-col class="sentimentBar">
+          <div class="anger" [ngStyle]="{'-webkit-transform': ('scale(1, ' + sentimentScores.anger + ')')}"></div>
+        </ion-col>
+        <ion-col class="sentimentBar">
+          <div class="disgust" [ngStyle]="{'-webkit-transform': ('scale(1, ' + sentimentScores.disgust + ')')}"></div>
+        </ion-col>
+        <ion-col class="sentimentBar">
+          <div class="fear" [ngStyle]="{'-webkit-transform': ('scale(1, ' + sentimentScores.fear + ')')}"></div>
+        </ion-col>
+        <ion-col class="sentimentBar">
+          <div class="joy" [ngStyle]="{'-webkit-transform': ('scale(1, ' + sentimentScores.joy + ')')}"></div>
+        </ion-col>
+        <ion-col class="sentimentBar">
+          <div class="sadness" [ngStyle]="{'-webkit-transform': ('scale(1, ' + sentimentScores.sadness + ')')}" ></div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="sentimentLabelRow">
+        <ion-col class="sentimentLabel">
+          <div class="anger">anger</div>
+        </ion-col>
+        <ion-col class="sentimentLabel">
+          <div class="disgust">disgust</div>
+        </ion-col>
+        <ion-col class="sentimentLabel">
+          <div class="fear">fear</div>
+        </ion-col>
+        <ion-col class="sentimentLabel">
+          <div class="joy">joy</div>
+        </ion-col>
+        <ion-col class="sentimentLabel">
+          <div class="sadness">sadness</div>
+        </ion-col>
+      </ion-row>      
+    </ion-grid>
+  </div>  
+  <div class="buttons">
+    <ion-grid><ion-row>
+      <ion-col>
+        <button assertive large block (click)="cancelRecording()">Cancel</button>
+      </ion-col>
+      <ion-col>
+        <button positive large block [disabled]="!isComplete" (click)="finish()">Done</button>
+      </ion-col>
+    </ion-row></ion-grid>
+  </div>
+</ion-content>

@@ -14,6 +14,7 @@
         <module>PushAdapter</module>
         <module>AuthenticationAdapter</module>
     <module>APIAdapter</module>
+    <module>LiveUpdateSegmentsAdapter</module>
   </modules>
 
     <properties>

@@ -75,9 +75,9 @@ export class InspectorApp {
     WL.Logger.config({autoSendLogs: true});
 
     if (Network.connection != Connection.NONE && Network.connection != Connection.UNKNOWN){
-        setInterval(function() {
-            WL.Logger.send();
-        }, 5000);
+        // setInterval(function() {
+        //     WL.Logger.send();
+        // }, 5000);
     }
     WL.Logger.updateConfigFromServer();
 	

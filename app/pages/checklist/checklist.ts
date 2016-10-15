@@ -166,7 +166,12 @@ export class ChecklistPage extends ParentPage {
           }
           this.nav.pop();
 					WL.Analytics.log({"inspectionComplete": new Date().getTime(), "inspectionDuration": this.inspection.duration / 1000, "completedByInspector": this.inspection.inspector});
-
+					
+					this._adapterService.callApi("/process", "POST", 
+						[{key: "action", 				value: "start"},
+						{key: "bpdId", 				value: "25.85d5a5e0-1ca8-4fcd-b435-300fa000aac1"},
+						{key: "processAppId", 	value: "2066.22034392-678c-4726-8961-b66a754bdd58"}],
+						this.inspection);
 
 
         } else {
@@ -178,6 +183,10 @@ export class ChecklistPage extends ParentPage {
 	}; 
 
 	setChecklistItemComplete(checklistItem){
+		if (this.inspection.status != "IN_PROGRESS"){
+			return;
+		}
+		
 		if (checklistItem.status == "PASSED"){
 			checklistItem.status = undefined;
 		} else {

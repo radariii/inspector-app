@@ -36,7 +36,7 @@
           </div>
         </ion-col>
         <ion-col>
-          <button (click)="completeInspection()" class="button button-block blue light done">
+          <button (click)="completeInspection()" class="button button-block blue light done" [disabled]="inspection.status == 'NOT_STARTED'">
             <i class="fa fa-check"></i>&nbsp;&nbsp;Done
           </button>
         </ion-col>
@@ -52,7 +52,7 @@
 		<div class="mainContentContainerBox">
 			<div class="listItem checklistItem" (click)="selectChecklistItem(checklistItem)" [ngClass]="{selected: selectedItem == checklistItem}" *ngFor="let checklistItem of inspection.checklistItems">
 				<div class="checklistItemContent">
-					<a (click)="setChecklistItemComplete(checklistItem)" class="checklistStatus">
+					<a (click)="setChecklistItemComplete(checklistItem)" [ngClass]="{disabled: inspection.status != 'IN_PROGRESS'}" class="checklistStatus">
 						<i class="fa"
 							[ngClass]="{'fa-circle-thin': !checklistItem.status,
 											   'fa-times-circle': (checklistItem.status == 'FAILED'),
@@ -82,7 +82,7 @@
 								</button>
 							</ion-col>
 							<ion-col>
-								<button class="button button-small button-block button-assertive" (click)="addIncident(checklistItem)">
+								<button class="button button-small button-block button-assertive" (click)="addIncident(checklistItem)" [disabled]="inspection.status != 'IN_PROGRESS'">
 									<i class="fa fa-warning"></i> <span class="text">Add incident</span>
 								</button>
 							</ion-col>

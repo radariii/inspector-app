@@ -32,8 +32,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import com.ibm.json.java.JSON;
 import com.ibm.json.java.JSONArray;
@@ -135,5 +137,64 @@ public class APIAdapterResource {
 		 	return Response.status(Response.Status.NOT_FOUND).build();
 		}		
 	}
+
+	/*
+	 * Path for method:
+	 * "<server address>/mfp/api/adapters/APIAdapter/callAPI"
+	 */
+
+	@ApiOperation(value = "Generic method to invoke API Connect Cognitive APIs", notes = "The body is sent directly to the cognitive API, after having been processed according to the content type")
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/callCognitiveAPI")
+	@OAuthSecurity(enabled=false)
+	public Response callBinaryAPI(byte[] data, @Context UriInfo uriInfo, @HeaderParam("Content-type") String contentType) {
+		try {
+			MultivaluedMap<String, String> queryParams = uriInfo.getQueryParameters();
+			String queryParamStr = "?";
+			for (String key : queryParams.keySet()){
+				queryParamStr += key + "=" + queryParams.getFirst(key);
+			}
+			System.err.println("==> Starting /callBinaryAPI processing: data = " + data + ", contentType = " + contentType);
+
+	 	 	okhttp3.Request.Builder requestBuilder = new okhttp3.Request.Builder();
+			RequestBody body = null;
+			String applicationClientId = configApi.getPropertyValue("appKey");
+			String applicationClientSecret = configApi.getPropertyValue("appSecret");
+			String gatewayUrl = configApi.getPropertyValue("apiGatewayUrl");
+			gatewayUrl += gatewayUrl.lastIndexOf("/") == gatewayUrl.length()-1 ? "" : "/";
+
+			//String url = "https://api.us.apiconnect.ibmcloud.com/crmilescaibmcom-inspector/sb/cognitive/";
+			String url = gatewayUrl + "cognitive/";
+			if (contentType.equals("application/json")){
+				url += "text-to-sentiment" + queryParamStr;
+				String strData = new String(data, "UTF-8");
+				System.err.println("==> Starting /callBinaryAPI: strData = " + strData);
+				body = (data != null ? RequestBody.create(okhttp3.MediaType.parse(contentType), strData) : null);
+			} else if (contentType.equals("audio/wav")){
+				url += "speech-to-sentiment" + queryParamStr;			
+				body = (data != null ? RequestBody.create(okhttp3.MediaType.parse(contentType), data) : null);	
+			}
+			System.err.println("==> Starting /callBinaryAPI: url = " + url);
+
+			HttpUrl.Builder httpUrlBuilder = HttpUrl.parse(url).newBuilder();
+			requestBuilder.url(httpUrlBuilder.build());
+			requestBuilder.addHeader("x-ibm-client-id", applicationClientId);
+			if (applicationClientSecret != null && !"".equals(applicationClientSecret)){
+				requestBuilder.addHeader("x-ibm-client-secret", applicationClientSecret);						
+			}
+			requestBuilder.post(body);
+			
+			System.out.println("==> Request built.");
+		
+			OkHttpClient client = new OkHttpClient();
+			okhttp3.Response response = client.newCall(requestBuilder.build()).execute();
+			System.out.println("==> Response: " + response);
+			return Response.status(response.code()).entity(response.body().string()).build();
+
+		} catch (IOException e){
+		 	return Response.status(Response.Status.NOT_FOUND).build();
+		}		
+	}	
 
 }

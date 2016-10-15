@@ -62,6 +62,7 @@
 
     .checklistStatus {
         width: 15%;
+        max-width: 50px;
         display: inline-block;
         box-sizing: border-box;
         cursor: pointer;
@@ -69,6 +70,9 @@
         text-align: center;
         position: relative;
         left: -2px;
+    }
+    .checklistStatus.disabled {
+        opacity: 0.5;
     }
 
 

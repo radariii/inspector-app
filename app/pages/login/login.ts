@@ -5,6 +5,7 @@ import {AdapterService} from '../../providers/adapter-service/adapter-service';
 import {StorageService} from '../../providers/storage-service/storage-service';
 import {ParentPage} from '../parent/parent';
 import {StepUpAuthenticationModal} from '../../components/step-up-authentication-modal/step-up-authentication-modal';
+import {RecordingModal} from '../../components/recording-modal/recording-modal';
 
 declare var window: any;
 declare var Paho: any;
@@ -118,6 +119,7 @@ export class LoginPage extends ParentPage {
   }
   
   login() {
+
     this.loginInProgress = true;    
     this.loginError = "";
 
