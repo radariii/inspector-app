@@ -27,6 +27,8 @@ echo USERNAME   = "${USERNAME}"
 echo PASSWORD   = "${PASSWORD}"
 echo SERVER URL = "${SERVER_URL}"
 
+curl -X POST -u ${USERNAME}:${PASSWORD} -F file=@./adapters/live-update-adapter-deploy.zip "${SERVER_URL}/mfpadmin/management-apis/2.0/runtimes/mfp/deploy/multi"
+
 curl -X PUT -d @liveUpdateSchema.json --user ${USERNAME}:${PASSWORD} -H "Content-Type:application/json" ${SERVER_URL}/mfpadmin/management-apis/2.0/runtimes/mfp/admin-plugins/liveUpdateAdapter/com.ibm.inspection.mfp8/schema
 
 segments_number=$(python -c 'import json,sys;obj=json.load(sys.stdin);print len(obj["items"]);' < liveUpdateSegments.json)
