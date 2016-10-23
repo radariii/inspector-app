@@ -1,0 +1,148 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Cognitive
+  x-ibm-name: cognitive
+host: $(catalog.host)
+basePath: /cognitive
+paths:
+  /text-to-sentiment:
+    post:
+      responses:
+        '200':
+          description: 200 OK
+      parameters:
+        - name: textInput
+          required: false
+          in: body
+          schema:
+            $ref: '#/definitions/textInput'
+  /speech-to-sentiment:
+    post:
+      responses:
+        '200':
+          description: 200 OK
+      parameters:
+        - name: audio
+          required: false
+          in: body
+          schema:
+            type: string
+            format: binary
+          description: Audio file in wav format
+securityDefinitions:
+  clientID:
+    description: ''
+    in: header
+    name: X-IBM-Client-Id
+    type: apiKey
+security:
+  - clientID: []
+x-ibm-configuration:
+  assembly:
+    execute:
+      - switch:
+          title: switch
+          case:
+            - condition: >-
+                ((request.verb==='POST')&&(api.operation.path==='/text-to-sentiment'))
+              execute:
+                - gatewayscript:
+                    title: gatewayscript
+                    source: >
+                      var body = apim.getvariable("request.body");
+
+                      apim.setvariable("translatedText", body.text);
+
+                      apim.setvariable("message.body", body.text);
+
+                      apim.setvariable("message.headers.content-type",
+                      "text/plain");
+                - invoke:
+                    target-url: >-
+                      https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2016-05-19
+                    username: 8125a024-8962-4631-8be5-5db2514c70c3
+                    password: qixJNFu7fIZE
+                    verb: POST
+                - gatewayscript:
+                    title: gatewayscript
+                    source: |
+                      var body = apim.getvariable("message.body");
+                      var text = apim.getvariable("translatedText");
+                      body.text = text;
+
+                      var allText = [];
+                      var sentences = text.split(/[\.!\?]+/);
+                      if (sentences.length > 0){
+                          allText.push(sentences[0]);
+                          if (sentences.length > 1){
+                            allText.push(text.substr(text.indexOf(sentences[1])).trim());
+                          }  
+                      }
+                      body.sentences = allText;
+
+                      apim.setvariable("message.body", body);
+            - condition: >-
+                ((request.verb==='POST')&&(api.operation.path==='/speech-to-sentiment'))
+              execute:
+                - invoke:
+                    title: invoke
+                    timeout: 60
+                    verb: POST
+                    cache-response: protocol
+                    cache-ttl: 900
+                    target-url: >-
+                      https://stream.watsonplatform.net/speech-to-text/api/v1/recognize$(request.search)
+                    username: 4248c503-16f6-4b26-8ee8-570ba50e2a11
+                    password: ZirXon5bxj7H
+                - gatewayscript:
+                    title: gatewayscript
+                    source: >-
+                      var body = apim.getvariable("message.body");
+
+                      var text = "";
+
+                      var allText = [];
+
+                      for (var i=0; i<body.results.length; i++){
+                          var curText = body.results[i].alternatives[0].transcript;
+                          curText = curText.trim();
+                          curText = curText[0].toUpperCase() + curText.substr(1);
+                          allText.push(curText);
+                          curText += ". ";
+                          text += curText;
+                      }
+
+                      apim.setvariable("message.body", text);
+
+                      apim.setvariable("translatedText", text);
+
+                      apim.setvariable("sentences", allText);
+
+                      apim.setvariable("message.headers.content-type",
+                      "text/plain");
+                - invoke:
+                    target-url: >-
+                      https://gateway.watsonplatform.net/tone-analyzer/api/v3/tone?version=2016-05-19
+                    username: 8125a024-8962-4631-8be5-5db2514c70c3
+                    password: qixJNFu7fIZE
+                    verb: POST
+                - gatewayscript:
+                    title: gatewayscript
+                    source: |-
+                      var body = apim.getvariable("message.body");
+                      var text = apim.getvariable("translatedText");
+                      var sentences = apim.getvariable("sentences");
+                      body.text = text;
+                      body.sentences = sentences;
+                      apim.setvariable("message.body", body);
+            - otherwise: []
+  gateway: datapower-gateway
+definitions:
+  textInput:
+    properties:
+      text:
+        type: string
+    additionalProperties: false
+produces:
+  - application/json
