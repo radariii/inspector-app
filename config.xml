@@ -104,11 +104,11 @@
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <plugin name="cordova-plugin-camera" spec="~2.2.0" />
     <plugin name="cordova-plugin-mfp" spec="https://hub.jazz.net/git/crmiles/cordova-plugin-mfp" />
-    <plugin name="cordova-plugin-mfp-liveupdate" spec="~8.0.0" />
     <plugin name="cordova-plugin-mfp-jsonstore" spec="https://hub.jazz.net/git/crmiles/cordova-plugin-mfp-jsonstore" />
     <plugin name="cordova-plugin-mfp-push" spec="~8.0.2016070407" />
     <plugin name="cordova-plugin-network-information" spec="~1.2.1" />
     <icon src="resources/ios/icon/icon-small@3x.png" />
     <plugin name="cordova-plugin-media" spec="https://github.com/radariii/cordova-plugin-media.git" />
     <plugin name="cordova-plugin-file-transfer" spec="~1.6.0" />
+    <plugin name="cordova-plugin-mfp-liveupdate" spec="https://github.com/mfpdev/mfp-live-update-cordova-plugin.git" />    
 </widget>
