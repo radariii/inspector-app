@@ -10,6 +10,10 @@ cd LiveUpdateSegmentsAdapter
 mfpdev adapter deploy
 cd ..
 
+cd sampleSegmentResolverAdapter
+mfpdev adapter deploy
+cd ..
+
 cd AuthenticationAdapter
 mfpdev adapter deploy
 cd ..

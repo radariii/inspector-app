@@ -15,6 +15,7 @@
         <module>AuthenticationAdapter</module>
     <module>APIAdapter</module>
     <module>LiveUpdateSegmentsAdapter</module>
+    <module>sampleSegmentResolverAdapter</module>
   </modules>
 
     <properties>
